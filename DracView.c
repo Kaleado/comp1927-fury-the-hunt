@@ -161,13 +161,14 @@ LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int s
    LocationID *adjacent = connectedLocations(currentView->game, numLocations, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game),road, 0,sea); //possible locations for dracula
 
    LocationID trail[TRAIL_SIZE]; 
+   int numLoc = *numLocations; 
    giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
-   LocationID *locations  = malloc(sizeof(LocationID)*20); //more than enough space. to be optimised properly!!
+   LocationID *locations  = malloc(sizeof(LocationID)*numLoc); //more than enough space. to be optimised properly!!
    int inTrail = FALSE;
    int locationIndex = 0;
    int i;
    int d;
-   for(i=0;i<*(numLocations);i++)
+   for(i=0;i<numLoc;i++)
    {
       inTrail = FALSE;
       for(d=0;d<TRAIL_SIZE;d++)

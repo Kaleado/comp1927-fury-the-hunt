@@ -51,6 +51,7 @@ void disposeQueue(Queue q)
 // - add Str to back of Queue
 void enterQueue(Queue q, LocationID loc)
 {
+  printf("-----%s-----\n", __func__);
   Link new = newNode(loc);
   if (q->front == NULL){
     q->back = new;
@@ -126,6 +127,7 @@ LocationID getAtIndexQueue(Queue q, int index){
 
 static Link newNode(LocationID loc)
 {
+  printf("-----%s-----\n", __func__);
   Link new = malloc(sizeof(Node));
   assert(new != NULL);
   new->val = loc;
