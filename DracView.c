@@ -9,7 +9,7 @@
 #include "DracView.h"
 #include "Map.h"
 #include "Queue.h"
-#include "Player.h"
+#include "PlayerRep.h"
      
 struct dracView {
    GameView game;

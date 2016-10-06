@@ -8,7 +8,7 @@
 #include "Game.h"
 #include "GameView.h"
 #include "Map.h"
-#include "Player.h"//A custom header file of our own formulation.
+#include "PlayerRep.h"//A custom header file of our own formulation.
 #include "Queue.h"//A custom header file of our own formulation.
 
 struct gameView {  

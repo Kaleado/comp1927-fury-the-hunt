@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "PlayerRep.h"
 
 Player newPlayer(int id){
   Player newPlayer = malloc(sizeof(struct playerRep));
