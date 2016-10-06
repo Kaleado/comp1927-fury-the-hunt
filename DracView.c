@@ -158,37 +158,37 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
 // What are my (Dracula's) possible next moves (locations)
 LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea)
 {
-   LocationID *adjacent = connectedLocations(currentView->game, numLocations, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game),road, 0,sea); //possible locations for dracula
+  int numLoc; 
+  LocationID *adjacent = connectedLocations(currentView->game, &numLoc, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game),road, 0,sea); //possible locations for dracula
 
-   LocationID trail[TRAIL_SIZE]; 
-   int numLoc = *numLocations; 
-   giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
-   LocationID *locations  = malloc(sizeof(LocationID)*numLoc); //more than enough space. to be optimised properly!!
-   int inTrail = FALSE;
-   int locationIndex = 0;
-   int i;
-   int d;
-   for(i=0;i<numLoc;i++)
-   {
+  LocationID trail[TRAIL_SIZE]; 
+  giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
+  LocationID *locations  = malloc(sizeof(LocationID)*numLoc); //more than enough space. to be optimised properly!!
+  int inTrail = FALSE;
+  int locationIndex = 0;
+  int i;
+  int d;
+  for(i=0;i<numLoc;i++)
+    {
       inTrail = FALSE;
       for(d=0;d<TRAIL_SIZE;d++)
-      { 
-         if(adjacent[i] == trail[d]) //item is in the trail.
-         {
-            inTrail = TRUE; //so we dont add it to the possible locations.
-            break; 
-         }
-      }
+	{ 
+	  if(adjacent[i] == trail[d]) //item is in the trail.
+	    {
+	      inTrail = TRUE; //so we dont add it to the possible locations.
+	      break; 
+	    }
+	}
       if(inTrail == FALSE)
-      {
-         locations[locationIndex] = adjacent[i]; //not in the trail, add it to the possible locations. 
-         locationIndex++;
-      }
-   }
-   
-   free(adjacent); 
+	{
+	  locations[locationIndex] = adjacent[i]; //not in the trail, add it to the possible locations. 
+	  locationIndex++;
+	}
+    }
+  *numLocations = i;
+  free(adjacent); 
 
-   return locations;
+  return locations;
 }
 
 // What are the specified player's next possible moves
