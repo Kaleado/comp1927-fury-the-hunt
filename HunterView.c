@@ -10,6 +10,7 @@
 #include "HunterView.h"
 
      
+     
 struct hunterView {
    GameView game;
    char *pastPlays;
