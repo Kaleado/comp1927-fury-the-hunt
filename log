@@ -1,0 +1,2572 @@
+
+Checking your files...
+=== Modified Makefile
+LDLIBS = -lSegFault -rdynamic
+# Makefile for "Fury of Dracula": The Hunt
+
+# change these to suit your local C environment
+CC = gcc
+CFLAGS = -gdwarf-2 -Wall  -gdwarf-2
+# do not change the following line
+BINS = dracula hunter
+# add any other *.o files that your system requires
+# (and add their dependencies below after DracView.o)
+# if you're not using Map.o or Places.o, you can remove them
+OBJS = GameView.o Map.o Places.o Map.o Queue.o PlayerRep.o
+# add whatever system libraries you need here (e.g. -lm)
+LIBS = -ljansson 
+
+all : $(BINS)
+
+dracula : dracPlayer.o dracula.o DracView.o $(OBJS) $(LIBS) -ljansson 
+hunter : hunterPlayer.o hunter.o HunterView.o $(OBJS) $(LIBS) -ljansson 
+
+dracPlayer.o : player.c Game.h DracView.h dracula.h
+	$(CC)  -gdwarf-2  -DI_AM_DRACULA -c player.c -o dracPlayer.o
+
+hunterPlayer.o : player.c Game.h HunterView.h hunter.h
+	$(CC)  -gdwarf-2  -c player.c -o hunterPlayer.o
+
+dracula.o : dracula.c Game.h DracView.h
+hunter.o : hunter.c Game.h HunterView.h
+Places.o : Places.c Places.h
+PlayerRep.o : PlayerRep.c PlayerRep.h
+Map.o : Map.c Map.h Places.h
+Queue.o : Queue.c Queue.h
+GameView.o : GameView.c Globals.h GameView.h
+HunterView.o : HunterView.c Globals.h HunterView.h
+DracView.o : DracView.c Globals.h DracView.h
+# if you use other ADTs, add dependencies for them here
+
+clean :
+	rm -f $(BINS) *.o core
+
+
+=== Compiling Dracula ...
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o dracula.o dracula.c
+gcc  -gdwarf-2  -DI_AM_DRACULA -c player.c -o dracPlayer.o
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o DracView.o DracView.c
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o GameView.o GameView.c
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o Map.o Map.c
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o Places.o Places.c
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o Queue.o Queue.c
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o PlayerRep.o PlayerRep.c
+gcc   dracula.o dracPlayer.o DracView.o GameView.o Map.o Places.o Queue.o PlayerRep.o /usr/lib/i386-linux-gnu/libjansson.so  -lSegFault -rdynamic -o dracula
+Dracula AI compiled OK
+=== Compiling Hunter ...
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o hunter.o hunter.c
+gcc  -gdwarf-2  -c player.c -o hunterPlayer.o
+gcc -gdwarf-2 -Wall  -gdwarf-2   -c -o HunterView.o HunterView.c
+gcc   hunter.o hunterPlayer.o HunterView.o GameView.o Map.o Places.o Queue.o PlayerRep.o /usr/lib/i386-linux-gnu/libjansson.so  -lSegFault -rdynamic -o hunter
+Hunter AI compiled OK
+
+=== Playing your Hunter against your Dracula ...
+
+   The FURY of DRACULA   
+          _..._          
+        .'     '.        
+       ; __   __ ;       
+       |/  \ /  \|       
+     |\| -- ' -- |/|     
+     |(| \o| |o/ |)|     
+     _\|    U    |/_     
+  .-'  | ,.___., |  '-.  
+  \    ;  V'-'V  ;    /  
+   `\   \       /   /`   
+     `\  '-...-'  /`     
+       `\  / \  /`       
+         `\\_//`         
+...........................
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": ""
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "I want to be as far away from Geneva as possible!",
+  "timer": 80
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: VI
+  message: I want to be as far away from Geneva as possible!
+  timer: 80
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "I want to be as far away from Geneva as possible!",
+  "timer": 96
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: VI
+  message: I want to be as far away from Geneva as possible!
+  timer: 96
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "I want to be as far away from Geneva as possible!",
+  "timer": 99
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: VI
+  message: I want to be as far away from Geneva as possible!
+  timer: 99
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "I want to be as far away from Geneva as possible!",
+  "timer": 101
+}
+> Moving from: undefined
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: VI
+  message: I want to be as far away from Geneva as possible!
+  timer: 101
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "AT",
+  "message": "I want to be as far away from Geneva as possible!",
+  "timer": 105
+}
+> Moving from: undefined
+> Blood Points: 40
+> Player 4 made move:
+> +++
+  move: AT
+  message: I want to be as far away from Geneva as possible!
+  timer: 105
+> ---
+> End of Round:  0
+> Starting Round:  1
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 118
+}
+> Moving from: VI
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 118
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 118
+}
+> Moving from: VI
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 118
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 128
+}
+> Moving from: VI
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 128
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 120
+}
+> Moving from: VI
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 120
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD...."
+==============================================================
+Program Output(9): locid: 32
+==============================================================
+Move:  {
+  "move": "IO",
+  "message": "",
+  "timer": 135
+}
+> Moving from: AT
+> Blood Points: 40
+> Player 4 made move:
+> +++
+  move: IO
+  message: 
+  timer: 135
+> ---
+> End of Round:  1
+> Starting Round:  2
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 120
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 120
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 127
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 127
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 124
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 124
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 163
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 163
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA...."
+==============================================================
+Program Output(9): locid: 65
+==============================================================
+Move:  {
+  "move": "VA",
+  "message": "",
+  "timer": 142
+}
+AT illegal
+Location AT already in trail
+> Moving from: IO
+> Blood Points: 38
+AT illegal
+Location AT already in trail
+AT illegal
+Location AT already in trail
+> Player 4 made move:
+> +++
+  move: VA
+  message: 
+  timer: 142
+> ---
+> End of Round:  2
+> Starting Round:  3
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T..."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 137
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 137
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 129
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 129
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 128
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 128
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 130
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 130
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI...."
+==============================================================
+Program Output(9): locid: 54
+==============================================================
+Move:  {
+  "move": "SA",
+  "message": "",
+  "timer": 145
+}
+AT illegal
+Location AT already in trail
+> Moving from: VA
+> Blood Points: 38
+AT illegal
+Location AT already in trail
+AT illegal
+Location AT already in trail
+> Player 4 made move:
+> +++
+  move: SA
+  message: 
+  timer: 145
+> ---
+> End of Round:  3
+> Starting Round:  4
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T..."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 133
+}
+> Moving from: VI
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 133
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 135
+}
+> Moving from: VI
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 135
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 144
+}
+> Moving from: VI
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 144
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 133
+}
+> Moving from: VI
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 133
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD...."
+==============================================================
+Program Output(9): locid: 58
+==============================================================
+Move:  {
+  "move": "SO",
+  "message": "",
+  "timer": 145
+}
+> Moving from: SA
+> Blood Points: 38
+> Player 4 made move:
+> +++
+  move: SO
+  message: 
+  timer: 145
+> ---
+> End of Round:  4
+> Starting Round:  5
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T..."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 138
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 138
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 134
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 134
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 164
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 164
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 135
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 135
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA...."
+==============================================================
+Program Output(8): locid: 8
+==============================================================
+Move:  {
+  "move": "BE",
+  "message": "",
+  "timer": 155
+}
+> Moving from: SO
+> Blood Points: 38
+> Player 4 made move:
+> +++
+  move: BE
+  message: 
+  timer: 155
+> ---
+> End of Round:  5
+> Starting Round:  6
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T..."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 486
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 486
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 464
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 464
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 495
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 495
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 469
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 469
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI...."
+==============================================================
+Program Output(9): locid: 13
+==============================================================
+Move:  {
+  "move": "BC",
+  "message": "",
+  "timer": 166
+}
+> Moving from: BE
+> Blood Points: 38
+> Player 4 made move:
+> +++
+  move: BC
+  message: 
+  timer: 166
+> ---
+> End of Round:  6
+> Starting Round:  7
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 146
+}
+> Moving from: VI
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 146
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 145
+}
+> Moving from: VI
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 145
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 148
+}
+> Moving from: VI
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 148
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 147
+}
+> Moving from: VI
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 147
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD...."
+==============================================================
+Program Output(9): locid: 20
+==============================================================
+Move:  {
+  "move": "CN",
+  "message": "",
+  "timer": 175
+}
+BE illegal
+Location BE already in trail
+> Moving from: BC
+> Blood Points: 38
+BE illegal
+Location BE already in trail
+BE illegal
+Location BE already in trail
+> Player 4 made move:
+> +++
+  move: CN
+  message: 
+  timer: 175
+> ---
+> End of Round:  7
+> Starting Round:  8
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T..."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 148
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 148
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 151
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 151
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 151
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 151
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 161
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 161
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA...."
+==============================================================
+Program Output(9): locid: 10
+==============================================================
+Move:  {
+  "move": "BS",
+  "message": "",
+  "timer": 218
+}
+BC illegal
+Location BC already in trail
+> Moving from: CN
+> Blood Points: 38
+BC illegal
+Location BC already in trail
+BC illegal
+Location BC already in trail
+> Player 4 made move:
+> +++
+  move: BS
+  message: 
+  timer: 218
+> ---
+> End of Round:  8
+> Starting Round:  9
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 484
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 484
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 481
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 481
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 476
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 476
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 484
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 484
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI...."
+==============================================================
+Program Output(9): locid: 32
+==============================================================
+Move:  {
+  "move": "IO",
+  "message": "",
+  "timer": 185
+}
+CN illegal
+Location CN already in trail
+> Moving from: BS
+> Blood Points: 36
+CN illegal
+Location CN already in trail
+CN illegal
+Location CN already in trail
+> Player 4 made move:
+> +++
+  move: IO
+  message: 
+  timer: 185
+> ---
+> End of Round:  9
+> Starting Round:  10
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 156
+}
+> Moving from: VI
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 156
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 160
+}
+> Moving from: VI
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 160
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 158
+}
+> Moving from: VI
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 158
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 159
+}
+> Moving from: VI
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 159
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD...."
+==============================================================
+Program Output(9): locid: 65
+==============================================================
+Move:  {
+  "move": "VA",
+  "message": "",
+  "timer": 193
+}
+> Moving from: IO
+> Blood Points: 34
+> Player 4 made move:
+> +++
+  move: VA
+  message: 
+  timer: 193
+> ---
+> End of Round:  10
+> Starting Round:  11
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 163
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 163
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 160
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 160
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 165
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 165
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA...."
+==============================================================
+Program Output(9): locid: 69
+==============================================================
+Move:  {
+  "move": "ZA",
+  "message": "moving randomly",
+  "timer": 168
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: ZA
+  message: moving randomly
+  timer: 168
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA...."
+==============================================================
+Program Output(8): locid: 3
+==============================================================
+Move:  {
+  "move": "AT",
+  "message": "",
+  "timer": 205
+}
+> Moving from: VA
+> Blood Points: 34
+> Player 4 made move:
+> +++
+  move: AT
+  message: 
+  timer: 205
+> ---
+> End of Round:  11
+> Starting Round:  12
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 491
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 491
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 491
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 491
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 495
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 495
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI...."
+==============================================================
+Program Output(9): locid: 68
+==============================================================
+Move:  {
+  "move": "VI",
+  "message": "moving randomly",
+  "timer": 501
+}
+> Moving from: ZA
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: VI
+  message: moving randomly
+  timer: 501
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "D1",
+  "message": "",
+  "timer": 198
+}
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+> Moving from: AT
+> Blood Points: 34
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+> Player 4 made move:
+> +++
+  move: D1
+  message: 
+  timer: 198
+> ---
+> End of Round:  12
+> Starting Round:  13
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 181
+}
+> Moving from: VI
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 181
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 180
+}
+> Moving from: VI
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 180
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 181
+}
+> Moving from: VI
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 181
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 181
+}
+> Moving from: VI
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 181
+> ---
+--------------------------------------------------------------------------
+> Running player 4... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD...."
+==============================================================
+Program Output(0): 
+==============================================================
+Move:  {
+  "move": "D1",
+  "message": "",
+  "timer": 200
+}
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+> Player 4 disqualified for illegal move.
+> +++ 
+  move: D1
+  message: 
+  timer: 200
+> --- 
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+Default Dracula Move: "HI"
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+> End of Round:  13
+> Starting Round:  14
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 191
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 191
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 191
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 191
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 183
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 183
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DS?..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 183
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 183
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+HI illegal
+Illegal move: Dracula already made a hide in his trail.
+Default Dracula Move: "TP"
+VA illegal
+Location VA already in trail
+IO illegal
+Location IO already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+HI illegal
+Illegal move: Dracula already made a hide in his trail.
+> End of Round:  14
+> Starting Round:  15
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DS?..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT..."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 188
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 188
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 190
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 190
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 190
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 190
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 210
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 210
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+HI illegal
+Illegal move: Dracula already made a hide in his trail.
+Default Dracula Move: "KL"
+> End of Round:  15
+> Starting Round:  16
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T..."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 191
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 191
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 196
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 196
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 200
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 200
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 196
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 196
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+HI illegal
+Illegal move: Dracula already made a hide in his trail.
+Default Dracula Move: "GA"
+> End of Round:  16
+> Starting Round:  17
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DC?T.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 203
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 203
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 197
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 197
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 199
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 199
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 201
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 201
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+KL illegal
+Location KL already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+HI illegal
+Illegal move: Dracula already made a hide in his trail.
+Default Dracula Move: "CD"
+> End of Round:  17
+> Starting Round:  18
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 531
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 531
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 565
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 565
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 536
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 536
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DC?.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 534
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 534
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+GA illegal
+Location GA already in trail
+KL illegal
+Location KL already in trail
+GA illegal
+Location GA already in trail
+KL illegal
+Location KL already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+HI illegal
+Illegal move: Dracula already made a hide in his trail.
+Default Dracula Move: "D2"
+GA illegal
+Location GA already in trail
+KL illegal
+Location KL already in trail
+> End of Round:  18
+> Starting Round:  19
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 210
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 210
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 215
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 215
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 213
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 213
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 214
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 214
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+CD illegal
+Location CD already in trail
+KL illegal
+Location KL already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+Default Dracula Move: "BC"
+> End of Round:  19
+> Starting Round:  20
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 251
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 251
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 221
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 221
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 217
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 217
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 217
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 217
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+GA illegal
+Location GA already in trail
+KL illegal
+Location KL already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+Default Dracula Move: "BE"
+> End of Round:  20
+> Starting Round:  21
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 597
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 597
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 578
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 578
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 582
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 582
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 547
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 547
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+BC illegal
+Location BC already in trail
+JM illegal
+Illegal move: Dracula cannot move to the hospital
+BC illegal
+Location BC already in trail
+JM illegal
+Illegal move: Dracula cannot move to the hospital
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+Default Dracula Move: "KL"
+BC illegal
+Location BC already in trail
+JM illegal
+Illegal move: Dracula cannot move to the hospital
+> End of Round:  21
+> Starting Round:  22
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 227
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 227
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 229
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 229
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 237
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 237
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD...."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 229
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 229
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+BE illegal
+Location BE already in trail
+BC illegal
+Location BC already in trail
+BE illegal
+Location BE already in trail
+BC illegal
+Location BC already in trail
+CD illegal
+Location CD already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+Default Dracula Move: "BD"
+BE illegal
+Location BE already in trail
+BC illegal
+Location BC already in trail
+> End of Round:  22
+> Starting Round:  23
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DBDT.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 231
+}
+> Moving from: BD
+> Life Points: 9
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 231
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DBDT.M. GBDTD.."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 235
+}
+> Moving from: BD
+> Life Points: 9
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 235
+> ---
+--------------------------------------------------------------------------
+> Running player 2... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DBDT.M. GBDTD.. SBDD..."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 232
+}
+> Moving from: BD
+> Life Points: 9
+> Player 2 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 232
+> ---
+--------------------------------------------------------------------------
+> Running player 3... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DBDT.M. GBDTD.. SBDD... HBDD..."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 234
+}
+> Moving from: BD
+> Life Points: 9
+> Player 3 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 234
+> ---
+--------------------------------------------------------------------------
+Player is currently disqualified. Making a move on their behalf.4
+KL illegal
+Location KL already in trail
+KL illegal
+Location KL already in trail
+D1 illegal
+Illegal double-back: not adjacent or is already in trail
+D2 illegal
+Illegal double-back: not adjacent or is already in trail
+D3 illegal
+Illegal double-back: not adjacent or is already in trail
+D4 illegal
+Illegal double-back: not adjacent or is already in trail
+D5 illegal
+Illegal double-back: not adjacent or is already in trail
+Default Dracula Move: "HI"
+KL illegal
+Location KL already in trail
+> End of Round:  23
+> Starting Round:  24
+--------------------------------------------------------------------------
+> Running player 0... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DBDT.M. GBDTD.. SBDD... HBDD... MBDD... DHIT.M."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 241
+}
+> Moving from: BD
+> Life Points: 6
+> Player 0 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 241
+> ---
+--------------------------------------------------------------------------
+> Running player 1... 
+Running with input: "pastPlays": "GVI.... SVI.... HVI.... MVI.... DC?.V.. GBD.... SBD.... HBD.... MBD.... DS?.... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T... GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DC?T... GVI.... SVI.... HVI.... MVI.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DC?T.V. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DC?T.M. GBD.... SBD.... HBD.... MBD.... DBDT.M. GBDTD.. SBDD... HBDD... MBDD... DHIT.M. GBDTD.."
+==============================================================
+Program Output(9): locid: 14
+==============================================================
+Move:  {
+  "move": "BD",
+  "message": "moving randomly",
+  "timer": 244
+}
+> Moving from: BD
+> Life Points: 8
+> Player 1 made move:
+> +++
+  move: BD
+  message: moving randomly
+  timer: 244
+> ---
+--------------------------------------------------------------------------
+> End of game: 
+> +++
+  score: 310
+  revealedPastPlays: GVI.... SVI.... HVI.... MVI.... DAT.V.. GBD.... SBD.... HBD.... MBD.... DIO.... GZA.... SZA.... HZA.... MZA.... DVAT... GVI.... SVI.... HVI.... MVI.... DSAT... GBD.... SBD.... HBD.... MBD.... DSOT... GZA.... SZA.... HZA.... MZA.... DBET... GVI.... SVI.... HVI.... MVI.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DCNT... GZA.... SZA.... HZA.... MZA.... DBS..M. GVI.... SVI.... HVI.... MVI.... DIO..M. GBD.... SBD.... HBD.... MBD.... DVAT.M. GZA.... SZA.... HZA.... MZA.... DATT.M. GVI.... SVI.... HVI.... MVI.... DD1T.M. GBD.... SBD.... HBD.... MBD.... DHI.VM. GBD.... SBD.... HBD.... MBD.... DTPT... GBD.... SBD.... HBD.... MBD.... DKLT... GBD.... SBD.... HBD.... MBD.... DGAT.M. GBD.... SBD.... HBD.... MBD.... DCDT.M. GBD.... SBD.... HBD.... MBD.... DD2T.M. GBD.... SBD.... HBD.... MBD.... DBCT.V. GBD.... SBD.... HBD.... MBD.... DBET.M. GBD.... SBD.... HBD.... MBD.... DKLT.M. GBD.... SBD.... HBD.... MBD.... DBDT.M. GBDTD.. SBDD... HBDD... MBDD... DHIT.M. GBDTD.. SBDD...
+  messages: ["I want to be as far away from Geneva as possible!","I want to be as far away from Geneva as possible!","I want to be as far away from Geneva as possible!","I want to be as far away from Geneva as possible!","I want to be as far away from Geneva as possible!","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly","moving randomly","moving randomly","===== Generating default move...player disqualified... =====","moving randomly","moving randomly"]
+> ---
+> Game Over
+310
+24
+Player 4 was disqualified? true
+

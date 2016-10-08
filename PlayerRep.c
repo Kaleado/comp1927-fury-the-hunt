@@ -69,7 +69,7 @@ int getPlayerHistory(Player p, LocationID* arr){
     }
   }
   i = 0;
-  while(arr[i] != UNKNOWN_LOCATION){
+  while(arr[i] != UNKNOWN_LOCATION && i < TRAIL_SIZE){
     enterQueue(p->history, arr[i]);
     i++;
   }

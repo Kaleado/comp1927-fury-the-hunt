@@ -1,8 +1,9 @@
-// Places.c ... implementation of Places
+// Places ... implementation of Places
 
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 #include "Places.h"
 
 typedef struct Place {
@@ -95,8 +96,9 @@ static Place places[] =
 // given a Place number, return its abbreviation
 char *idToAbbrev(LocationID p)
 {
-   assert(validPlace(p));
-   return places[p].abbrev;
+  printf("locid: %d", p);
+  assert(validPlace(p));
+  return places[p].abbrev;
 }
 
 // given a Place number, return its name

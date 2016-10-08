@@ -18,6 +18,11 @@ void decideDraculaMove(DracView gameState)
     registerBestPlay("AT","I want to be as far away from Geneva as possible!");
   }
   else {
-    registerBestPlay(idToAbbrev(adjacent[rand() % numAdjacent]),"");
+    if(numAdjacent == 0){
+      registerBestPlay("D1","");
+    }
+    else {
+      registerBestPlay(idToAbbrev(adjacent[rand() % numAdjacent]),"");
+    }
   }
 }
