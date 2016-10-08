@@ -17,7 +17,7 @@ void decideHunterMove(HunterView gameState){
   int i;
   int firstValid = -1;
   int nextMoveInPath = 0;
-  LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1, 1);
+  LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0, 0);
   //printf("numAdjacent: %d", numAdjacent);
   if(giveMeTheRound(gameState) == 0){    
     registerBestPlay("VI","I want to be as far away from Geneva as possible!");
