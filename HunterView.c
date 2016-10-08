@@ -120,8 +120,8 @@ void giveMeTheTrail(HunterView currentView, PlayerID player,
                             LocationID trail[TRAIL_SIZE])
 {
    //printf("giveMeTheTrail\n");
-   getHistory(currentView->game, player, trail);
-   return;
+  getHistory(currentView->game, player, trail);
+  return;
 }
 
 

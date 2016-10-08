@@ -159,7 +159,12 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
 LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea)
 {
   int numLoc; 
-  LocationID *adjacent = connectedLocations(currentView->game, &numLoc, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game),road, 0,sea); //possible locations for dracula
+  LocationID *adjacent = connectedLocations(currentView->game,
+					    &numLoc,
+					    getLocation(currentView->game,PLAYER_DRACULA),
+					    PLAYER_DRACULA,
+					    getRound(currentView->game),
+					    road, 0, sea); //possible locations for dracula
 
   LocationID trail[TRAIL_SIZE]; 
   giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
