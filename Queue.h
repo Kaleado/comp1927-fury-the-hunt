@@ -4,6 +4,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "Places.h"
 #include "Map.h"
 #include "Globals.h"
 

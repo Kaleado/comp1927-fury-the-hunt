@@ -107,6 +107,8 @@ void getHistory(GameView currentView, PlayerID player,
 
 //// Functions that query the map to find information about connectivity
 
+int findPathTo(GameView currentView, LocationID destination, PlayerID player, LocationID* path);
+
 // connectedLocations() returns an array of LocationID that represent
 //   all locations that are connected to the given LocationID.
 // road, rail and sea are connections should only be considered

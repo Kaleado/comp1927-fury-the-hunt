@@ -3,6 +3,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "Queue.h"
 #include "Places.h"
 
 typedef struct edge{
@@ -21,5 +22,6 @@ void showMap(Map g);
 int  numV(Map g);
 int  numE(Map g, TransportID t);
 int connections(Map, LocationID, LocationID, TransportID[]);
+int findPath(Map, LocationID, LocationID, int, int*);
 
 #endif

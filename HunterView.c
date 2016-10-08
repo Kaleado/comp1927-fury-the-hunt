@@ -128,6 +128,12 @@ void giveMeTheTrail(HunterView currentView, PlayerID player,
 
 //// Functions that query the map to find information about connectivity
 
+//Finds a path (stored in path) to the given destination. The path length is returned as an integer.
+int findMeAPath(HunterView currentView, LocationID destination, LocationID* path){
+  PlayerID me = whoAmI(currentView);
+  return findPathTo(currentView->game, destination, me, path);
+}
+
 // What are my possible next moves (locations)
 LocationID *whereCanIgo(HunterView currentView, int *numLocations,
                         int road, int rail, int sea)

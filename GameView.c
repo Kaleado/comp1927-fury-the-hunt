@@ -225,6 +225,11 @@ void getHistory(GameView currentView, PlayerID player,
 
 //// Functions that query the map to find information about connectivity
 
+//Finds a path from player's location to the destination.
+int findPathTo(GameView currentView, LocationID destination, PlayerID player, LocationID* path){
+  return findPath(currentView->gameMap, getLocation(currentView, player), destination, 1, path);
+}
+
 // Returns an array of LocationIDs for all directly connected locations
 LocationID *connectedLocations(GameView currentView, int *numLocations,
                                LocationID from, PlayerID player, Round round,

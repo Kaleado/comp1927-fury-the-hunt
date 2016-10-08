@@ -89,6 +89,11 @@ void giveMeTheTrail(HunterView currentView, PlayerID player,
 
 //// Functions that query the map to find information about connectivity
 
+// findMeAPath() provides a path from the current player's location to the
+// given destination. The function returns the length of the path, whilst
+// the path itself is provided via the path parameter.
+int findMeAPath(HunterView currentView, LocationID destination, LocationID* path);
+
 // whereCanIgo() returns an array of LocationIDs giving
 //   all locations that the current player could reach in his next move
 // road, rail and/or sea connections should only be considered

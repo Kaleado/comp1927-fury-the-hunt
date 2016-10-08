@@ -7,7 +7,6 @@
 #include <string.h>
 #include "Queue.h"
 
-
 // Function signatures
 
 Queue newQueue();
