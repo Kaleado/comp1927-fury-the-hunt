@@ -19,8 +19,8 @@ void decideHunterMove(HunterView gameState){
   int nextMoveInPath = 0;
   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1, 1);
   //printf("numAdjacent: %d", numAdjacent);
-  if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("AT","I want to be as far away from Geneva as possible!");
+  if(giveMeTheRound(gameState) == 0){    
+    registerBestPlay("AT","I want to be as far away from Geneva as possible!");
   }
   else {
     //We update the path every three rounds.
