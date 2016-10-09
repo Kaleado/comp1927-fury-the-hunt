@@ -92,8 +92,8 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
       for (j=0; j<TRAIL_SIZE; j++) {
          if (trail[j] == adjacent[min[i]]) {
             flag = 0;
-            printf ("\nflag = %d, trail at %d\n", flag, trail[j]);
          }
+         //printf ("\nflag = %d, trail at %d, adjacent at %d, %d\n", flag, trail[j], temp[i], numAdjacent);
       }
       if (flag) return adjacent[min[i]];
    }

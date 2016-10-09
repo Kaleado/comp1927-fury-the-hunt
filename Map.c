@@ -457,21 +457,18 @@ int  getlen(Map g, LocationID start, LocationID to){
     int i = 0;
     for(i=0; i<g->nV; i++) level[i] = -1;
     level[start] = 0;
-    int type[3];
-    type[0] = ROAD;
-    type[1] = RAIL;
-    type[2] = BOAT;
+    int type[3] = {ROAD, RAIL, BOAT};
     int flag = 0;
     int visited[g->nV];
-    for(i=0; i<g->nV; i++)  visited[i] = 0; 
+    for(i=0; i<g->nV; i++) visited[i] = 0;
 
     while(!emptyQueue(q) && flag == 0){
         LocationID x = leaveQueue(q);
         LocationID y = 0;
         if(visited[x] > 1)   continue;
         for(y=0; y<g->nV; y++){
-            if(connections(g,start,to,type) == 0)   continue;
-            if(level[y] == -1 && connections(g,start,to,type) > 0){
+            if(connections(g,x,y,type) == 0)   continue;
+            if(level[y] == -1){
                 enterQueue(q,y);
                 level[y] = level[x] + 1;
                 visited[y]++;
@@ -483,5 +480,5 @@ int  getlen(Map g, LocationID start, LocationID to){
         }
     }
 
-    return level[to];
+    return level[to]+1;
 }
