@@ -28,7 +28,7 @@ void decideDraculaMove(DracView gameState)
          int distance [numAdjacent][4];
          all_distance(M,gameState,numAdjacent,adjacent,distance);
          
-         registerBestPlay(idToAbbrev(best_nextPlace(distance,numAdjacent)),"");
+         registerBestPlay(idToAbbrev(adjacent[best_nextPlace(distance,numAdjacent)]),"");
       }
    }
 }

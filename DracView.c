@@ -1,6 +1,7 @@
 // DracView.c ... DracView ADT implementation
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <assert.h>
 #include "Globals.h"
@@ -160,7 +161,7 @@ LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int s
    int numLoc; 
    LocationID trail[TRAIL_SIZE]; 
    LocationID *adjacent = connectedLocations(currentView->game, &numLoc, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game), road, 0, sea); //possible locations for dracula
-   LocationID *locations  = malloc(sizeof(LocationID)*NUM_MAP_LOCATIONS); //more than enough space. to be optimised properly!!
+   LocationID *locations  = malloc(sizeof(LocationID)*numLoc); //more than enough space. to be optimised properly!!
 
    giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
    int inTrail;
