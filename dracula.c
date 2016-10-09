@@ -7,28 +7,35 @@
 #include "DracView.h"
 #include <time.h>
 #include "Map.h"
+#include "Places.h"
 
 static void all_distance(Map g, DracView gameState, int numLocations, LocationID *Next_Place, int distance[][4]);
-static int best_nextPlace(int distance[][4], int numAdjacent);
+static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent);
 
 void decideDraculaMove(DracView gameState)
 {
    //srand(time(NULL));
    int numAdjacent;
+   LocationID trail[TRAIL_SIZE];
    LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
    Map M = newMap();
+   giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
 
    //printf("numAdjacent: %d", numAdjacent);
    if(giveMeTheRound(gameState) == 0){
       registerBestPlay("AT","I want to be as far away from Geneva as possible!");
    } else {
       if(numAdjacent == 0){
-      registerBestPlay("TP","");
+         registerBestPlay("TP","Oh no");
       } else {
          int distance [numAdjacent][4];
          all_distance(M,gameState,numAdjacent,adjacent,distance);
-         
-         registerBestPlay(idToAbbrev(adjacent[best_nextPlace(distance,numAdjacent)]),"");
+         int nextID = best_nextPlace(distance,numAdjacent,trail,adjacent);
+         if (nextID == NOWHERE) {
+            registerBestPlay("TP","Oh no");
+         } else {
+            registerBestPlay(idToAbbrev(nextID),"far awayyyy");
+         }
       }
    }
 }
@@ -48,27 +55,49 @@ static void all_distance(Map g, DracView gameState, int numLocations, LocationID
 	}
 }
 
-static int best_nextPlace(int distance[][4], int numAdjacent){
+static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent){
    int temp[numAdjacent];
-   int i = 0;
-   int j = 0;
-
+   int min[numAdjacent];
+   int i, j, t, flag;
+//   int hide = 0, db = 0;
+/*
+   for (i=0; i<TRAIL_SIZE; i++) {
+      if (trail[i] == HIDE) hide = 1;
+      if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
+   }
+*/
    for(i=0; i<numAdjacent; i++){
       temp[i] = distance[i][0];
       for(j=1; j<4; j++){
          if(distance[i][j] < temp[i]) temp[i] = distance[i][j];
       }
+      min[i] = i;
    }
 
-   int min = temp[0];
-   int minP = 0;
-   for(i=1; i<numAdjacent; i++){
-      if(temp[i] < min) {
-         min = temp[i];
-         minP = i;
+   for (i=numAdjacent-1; i>0; i--) {
+      for (j=0; j<i; j++) {
+         if(temp[j] < temp[j+1]) {
+            t = temp[j];
+            temp[j] = temp[j+1];
+            temp[j+1] = t;
+            t = min[j];
+            min[j] = min[j+1];
+            min[j+1] = t;
+         }
       }
    }
+   
+   for (i=0; i<numAdjacent; i++) {
+      flag = 1;
+      for (j=0; j<TRAIL_SIZE; j++) {
+         if (trail[j] == adjacent[min[i]]) {
+            flag = 0;
+            printf ("\nflag = %d, trail at %d\n", flag, trail[j]);
+         }
+      }
+      if (flag) return adjacent[min[i]];
+   }
 
-   return minP;
+   return NOWHERE;
 }
 

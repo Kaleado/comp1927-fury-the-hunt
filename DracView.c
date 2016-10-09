@@ -181,6 +181,7 @@ LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int s
       }
    }
    *numLocations = locationIndex;
+   //printf("\n**%s, %d\n", idToAbbrev(locations[1]), locationIndex);
    free(adjacent); 
    return locations;
 }
