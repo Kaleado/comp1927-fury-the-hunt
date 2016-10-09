@@ -23,5 +23,5 @@ int  numV(Map g);
 int  numE(Map g, TransportID t);
 int connections(Map, LocationID, LocationID, TransportID[]);
 int findPath(Map, LocationID, LocationID, int, int*);
-
+int  getlen(Map g, LocationID start, LocationID to);
 #endif

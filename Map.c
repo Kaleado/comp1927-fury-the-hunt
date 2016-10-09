@@ -444,3 +444,44 @@ int findPath(Map gameMap, LocationID src, LocationID dest, int max, int *path)
     return i;
   }
 }
+
+
+//Find the minimum steps between two vertices using breadth-first traversal
+int  getlen(Map g, LocationID start, LocationID to){
+
+    assert(g != NULL);
+    if(start == to) return 0;
+    Queue q = newQueue();
+    enterQueue(q,start);
+    int level[g->nV];
+    int i = 0;
+    for(i=0; i<g->nV; i++) level[i] = -1;
+    level[start] = 0;
+    int type[3];
+    type[0] = ROAD;
+    type[1] = RAIL;
+    type[2] = BOAT;
+    int flag = 0;
+    int visited[g->nV];
+    for(i=0; i<g->nV; i++)  visited[i] = 0; 
+
+    while(!emptyQueue(q) && flag == 0){
+        LocationID x = leaveQueue(q);
+        LocationID y = 0;
+        if(visited[x] > 1)   continue;
+        for(y=0; y<g->nV; y++){
+            if(connections(g,start,to,type) == 0)   continue;
+            if(level[y] == -1 && connections(g,start,to,type) > 0){
+                enterQueue(q,y);
+                level[y] = level[x] + 1;
+                visited[y]++;
+                if(y == to){
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    return level[to];
+}
