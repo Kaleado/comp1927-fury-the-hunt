@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 {
 #ifdef I_AM_DRACULA
    DracView gameState;
-   char *plays = "GAT.... SED.... HZU.... MZU.... DAT.... GVA.... SMN.... HMU.... MMR....";
+   char *plays = "GVI.... SVI.... HVI.... MVI.... DAT.V.. GVI.... SVI.... HVI.... MVI.... DIO.... GVI.... SVI.... HVI.... MVI.... DBS.... GVI.... SVI.... HVI.... MVI.... DCNT... GVI.... SVI.... HVI.... MVI.... DVRT... GVI.... SVI.... HVI.... MVI.... DSOT... GVI.... SVI.... HVI.... MVI.... DSAT.V. GVI.... SVI.... HVI.... MVI....";
    PlayerMessage msgs[3] = { "", "", "" };
    gameState = newDracView(plays,msgs);
    decideDraculaMove(gameState);
