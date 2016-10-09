@@ -13,26 +13,24 @@ static int best_nextPlace(int distance[][4], int numAdjacent);
 
 void decideDraculaMove(DracView gameState)
 {
-  //srand(time(NULL));
-  int numAdjacent;
-  LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
-  Map M = newMap();
+   //srand(time(NULL));
+   int numAdjacent;
+   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
+   Map M = newMap();
 
-  //printf("numAdjacent: %d", numAdjacent);
-  if(giveMeTheRound(gameState) == 0){
-    registerBestPlay("AT","I want to be as far away from Geneva as possible!");
-  }
-  else {
-    if(numAdjacent == 0){
+   //printf("numAdjacent: %d", numAdjacent);
+   if(giveMeTheRound(gameState) == 0){
+      registerBestPlay("AT","I want to be as far away from Geneva as possible!");
+   } else {
+      if(numAdjacent == 0){
       registerBestPlay("TP","");
-    }
-    else {
-      int distance [numAdjacent][4];
-      all_distance(M,gameState,numAdjacent,adjacent,distance);
-      
-      registerBestPlay(idToAbbrev(best_nextPlace(distance,numAdjacent)),"");
-    }
-  }
+      } else {
+         int distance [numAdjacent][4];
+         all_distance(M,gameState,numAdjacent,adjacent,distance);
+         
+         registerBestPlay(idToAbbrev(best_nextPlace(distance,numAdjacent)),"");
+      }
+   }
 }
 
 
@@ -51,24 +49,26 @@ static void all_distance(Map g, DracView gameState, int numLocations, LocationID
 }
 
 static int best_nextPlace(int distance[][4], int numAdjacent){
-  int temp[numAdjacent];
-  int i = 0;
-  int j = 0;
+   int temp[numAdjacent];
+   int i = 0;
+   int j = 0;
 
-  for(i=0; i<numAdjacent; i++)  temp[i] = distance[i][0];
+   for(i=0; i<numAdjacent; i++){
+      temp[i] = distance[i][0];
+      for(j=1; j<4; j++){
+         if(distance[i][j] < temp[i]) temp[i] = distance[i][j];
+      }
+   }
 
-  for(i=0; i<numAdjacent; i++){
-    for(j=0; j<4; j++){
-      if(distance[i][j] < temp[i])
-        temp[i] = distance[i][j];
-    }
-  }
+   int min = temp[0];
+   int minP = 0;
+   for(i=1; i<numAdjacent; i++){
+      if(temp[i] < min) {
+         min = temp[i];
+         minP = i;
+      }
+   }
 
-  int min = temp[0];
-  for(i=0; i<numAdjacent; i++){
-    if(temp[i] < min) min = temp[i];
-  }
-
-  return min;
+   return minP;
 }
 

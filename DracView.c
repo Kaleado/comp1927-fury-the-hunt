@@ -159,8 +159,8 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
 LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea) {
    int numLoc; 
    LocationID trail[TRAIL_SIZE]; 
-   LocationID *locations  = malloc(sizeof(LocationID)*NUM_MAP_LOCATIONS); //more than enough space. to be optimised properly!!
    LocationID *adjacent = connectedLocations(currentView->game, &numLoc, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game), road, 0, sea); //possible locations for dracula
+   LocationID *locations  = malloc(sizeof(LocationID)*NUM_MAP_LOCATIONS); //more than enough space. to be optimised properly!!
 
    giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
    int inTrail;
@@ -175,7 +175,7 @@ LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int s
 	      }
 	   }
       if(inTrail == FALSE)	{
-	      locations[i] = adjacent[i]; //not in the trail, add it to the possible locations. 
+	      locations[locationIndex] = adjacent[i]; //not in the trail, add it to the possible locations. 
 	      locationIndex++;
       }
    }
