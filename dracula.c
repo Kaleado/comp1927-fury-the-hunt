@@ -24,7 +24,7 @@ void decideDraculaMove(DracView gameState)
   }
   else {
     if(numAdjacent == 0){
-      registerBestPlay("D1","");
+      registerBestPlay("TP","");
     }
     else {
       int distance [numAdjacent][4];
