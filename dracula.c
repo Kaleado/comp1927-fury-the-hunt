@@ -8,7 +8,7 @@
 #include <time.h>
 #include "Map.h"
 #include "Places.h"
-
+ 
 static void all_distance(Map g, DracView gameState, int numLocations, LocationID *Next_Place, int distance[][4]);
 static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent);
 
