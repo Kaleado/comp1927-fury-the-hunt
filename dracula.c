@@ -14,11 +14,12 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
 
 void decideDraculaMove(DracView gameState)
 {
-   srand(time(NULL));
+   //srand(time(NULL));
    int numAdjacent;
    LocationID trail[TRAIL_SIZE];
    LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0);
    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
+   /*
    int hide = 0, db = 0,i;
 
    for (i=0; i<TRAIL_SIZE; i++) {
@@ -45,14 +46,14 @@ void decideDraculaMove(DracView gameState)
       }
    }
    return;
-   
+   */
    // move with strategy leads to illegal move in dryrun
    // make
    Map M = newMap();
 
    //printf("numAdjacent: %d", numAdjacent);
    if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("SA","I want to be as far away from Geneva as possible!");
+      registerBestPlay("AT","I want to be as far away from Geneva as possible!");
    } else {
       if(numAdjacent == 0){
          registerBestPlay("TP","Oh no");
