@@ -14,16 +14,45 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
 
 void decideDraculaMove(DracView gameState)
 {
-   //srand(time(NULL));
+   srand(time(NULL));
    int numAdjacent;
    LocationID trail[TRAIL_SIZE];
-   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
-   Map M = newMap();
+   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0);
    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
+   int hide = 0, db = 0,i;
+
+   for (i=0; i<TRAIL_SIZE; i++) {
+      if (trail[i] == HIDE) hide = 1;
+      if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
+   }
+
+   
+   if(giveMeTheRound(gameState) == 0){
+      registerBestPlay("SA","I want to be as far away from Geneva as possible!");
+   } else {
+      if (numAdjacent) {
+         registerBestPlay(idToAbbrev(adjacent[(int)rand() % numAdjacent]),"moving randomly");
+      } else {
+         if (hide) {
+            if (db) {
+               registerBestPlay("TP","tp");
+            } else {
+               registerBestPlay("D1","db");
+            }
+         } else {
+            registerBestPlay("HI","hide");
+         }
+      }
+   }
+   return;
+   
+   // move with strategy leads to illegal move in dryrun
+   // make
+   Map M = newMap();
 
    //printf("numAdjacent: %d", numAdjacent);
    if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("AT","I want to be as far away from Geneva as possible!");
+      registerBestPlay("SA","I want to be as far away from Geneva as possible!");
    } else {
       if(numAdjacent == 0){
          registerBestPlay("TP","Oh no");
