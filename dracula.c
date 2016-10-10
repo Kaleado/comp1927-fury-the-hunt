@@ -17,7 +17,7 @@ void decideDraculaMove(DracView gameState)
    //srand(time(NULL));
    int numAdjacent;
    LocationID trail[TRAIL_SIZE];
-   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0);
+   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
    /*
    int hide = 0, db = 0,i;
@@ -60,6 +60,10 @@ void decideDraculaMove(DracView gameState)
       } else {
          int distance [numAdjacent][4];
          all_distance(M,gameState,numAdjacent,adjacent,distance);
+         /*int i;
+         for (i = 0; i < numAdjacent; i++) {
+            printf ("ab = %d, %s\n", adjacent[i], idToAbbrev(adjacent[i]));
+         }*/
          int nextID = best_nextPlace(distance,numAdjacent,trail,adjacent);
          if (nextID == NOWHERE) {
             registerBestPlay("TP","Oh no");

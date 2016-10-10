@@ -81,6 +81,12 @@ void executeMove(GameView gv, char* move){
     }
     newLocation = DOUBLE_BACK_1+locationAbbr[1]-'1';
     addToPlayerHistory(gv->players[playerID], newLocation);
+  } 
+  //If TP
+  else if(locationAbbr[0] == 'T' && locationAbbr[1] == 'P') {
+    newLocation = 17;
+    addToPlayerHistory(gv->players[playerID], newLocation);
+    isAtSea = 0;
   }
   //Otherwise, for any other valid location.
   else {
@@ -99,19 +105,26 @@ void executeMove(GameView gv, char* move){
     damagePlayer(gv->players[playerID], 2);
   }
   //We examine all of the events given in the action string.
-  for(i = 0; i < 4; i++){
-    switch(events[i]){
-    case 'T':
-      //Trap.
-      damagePlayer(gv->players[playerID], 2);
-      break;
-    case 'D':
-      //Dracula.
-      damagePlayer(gv->players[playerID], 4);
-      damagePlayer(gv->players[PLAYER_DRACULA], 10);
-      break;
+  if(playerID != PLAYER_DRACULA) {
+    for(i = 0; i < 4; i++){
+      switch(events[i]){
+      case 'T':
+        //Trap.
+        damagePlayer(gv->players[playerID], 2);
+        break;
+      case 'D':
+        //Dracula.
+        damagePlayer(gv->players[playerID], 4);
+        damagePlayer(gv->players[PLAYER_DRACULA], 10);
+        break;
+      }
     }
   }
+  //Dracula regains 10 blood if he's at his castle and not dead.
+  if(playerID == PLAYER_DRACULA && newLocation == 17 && getPlayerHealth(gv->players[PLAYER_DRACULA]) > 0) {
+    setPlayerHealth(gv->players[PLAYER_DRACULA], getPlayerHealth(gv->players[PLAYER_DRACULA])+10);
+  }
+
   //We move to the next player.
   gv->currentPlayer++;
   if(gv->currentPlayer >= NUM_PLAYERS){

@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 {
 #ifdef I_AM_DRACULA
    DracView gameState;
-   char *plays = "GVI.... SVI.... HVI.... MVI.... DSA.V.. GZA.... SZA.... HZA.... MZA.... DVAT... GMU.... SMU.... HMU.... MMU.... DSOT... GMU.... SMU.... HMU.... MMU.... DBCT... GMU.... SMU.... HMU.... MMU.... DCNT... GMU.... SMU.... HMU.... MMU....";
+   char *plays = "GVI.... SVI.... HVI.... MVI.... DAT.V.. GPR.... SPR.... HPR.... MPR.... DIO.... GBR.... SBR.... HBR.... MBR.... DBS.... GBR.... SBR.... HBR.... MBR.... DCNT... GBR.... SBR.... HBR.... MBR.... DVRT... GBR.... SBR.... HBR.... MBR.... DSOT... GBR.... SBR.... HBR.... MBR.... DSAT.V. GBR.... SBR.... HBR.... MBR.... DVAT... GBR.... SBR.... HBR.... MBR.... DATT... GBR.... SBR.... HBR.... MBR.... DIO..M. GBR.... SBR.... HBR.... MBR.... DBS..M. GBR.... SBR.... HBR.... MBR.... DCNT.M. GBR.... SBR.... HBR.... MBR.... DVRT.M. GBR.... SBR.... HBR.... MBR.... DSO.VM. GBR.... SBR.... HBR.... MBR.... DSAT.M. GBR.... SBR.... HBR.... MBR.... DVAT... GBR.... SBR.... HBR.... MBR.... DATT... GBR.... SBR.... HBR.... MBR.... DIO..M. GBR.... SBR.... HBR.... MBR.... DBS..M. GBR.... SBR.... HBR.... MBR.... DCNT.V. GBR.... SBR.... HBR.... MBR.... DVRT.M. GBR.... SBR.... HBR.... MBR.... DSOT.M. GBR.... SBR.... HBR.... MBR.... DBET.M. GHA.... SHA.... HHA.... MHA.... DSJT... GCO.... SCO.... HCO.... MCO....";
    PlayerMessage msgs[3] = { "", "", "" };
    gameState = newDracView(plays,msgs);
    decideDraculaMove(gameState);

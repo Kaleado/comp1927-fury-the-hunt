@@ -181,7 +181,7 @@ LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int s
       }
    }
    *numLocations = locationIndex;
-   //printf("\n**%s, %d\n", idToAbbrev(locations[1]), locationIndex);
+   for (i = 0; i < numLoc; i++) printf("\n%s to %s, num = %d, blood = %d\n", idToAbbrev(getLocation(currentView->game,PLAYER_DRACULA)),idToAbbrev(adjacent[i]), i, getHealth(currentView->game, PLAYER_DRACULA));
    free(adjacent); 
    return locations;
 }
