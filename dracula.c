@@ -20,40 +20,8 @@ void decideDraculaMove(DracView gameState)
    LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
 
-   // random version
-   /*
-   int hide = 0, db = 0,i;
-
-   for (i=0; i<TRAIL_SIZE; i++) {
-      if (trail[i] == HIDE) hide = 1;
-      if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
-   }
-
-   
-   if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("SA","I want to be as far away from Geneva as possible!");
-   } else {
-      if (numAdjacent) {
-         registerBestPlay(idToAbbrev(adjacent[(int)rand() % numAdjacent]),"moving randomly");
-      } else {
-         if (hide) {
-            if (db) {
-               registerBestPlay("TP","tp");
-            } else {
-               registerBestPlay("D1","db");
-            }
-         } else {
-            registerBestPlay("HI","hide");
-         }
-      }
-   }
-   return;
-   */
-
    // Logically moving version
    Map M = newMap();
-
-   //printf("numAdjacent: %d", numAdjacent);
    if(giveMeTheRound(gameState) == 0){
       registerBestPlay("DC","I want to be as far away from Geneva as possible!");
    } else {
@@ -63,7 +31,17 @@ void decideDraculaMove(DracView gameState)
       for (i = 0; i < numAdjacent; i++) {
          printf ("ab = %d, %s\n", adjacent[i], idToAbbrev(adjacent[i]));
       }*/
-      registerBestPlay(idToAbbrev(best_nextPlace(distance,numAdjacent,trail,adjacent)),"far awayyyy");
+      LocationID bestID = best_nextPlace(distance,numAdjacent,trail,adjacent);
+      switch (bestID) {
+         case DOUBLE_BACK_1: registerBestPlay("D1","no");return;
+         case DOUBLE_BACK_2: registerBestPlay("D2","no");return;
+         case DOUBLE_BACK_3: registerBestPlay("D3","no");return;
+         case DOUBLE_BACK_4: registerBestPlay("D4","no");return;
+         case DOUBLE_BACK_5: registerBestPlay("D5","no");return;
+         case HIDE:          registerBestPlay("HI","no");return;
+         case TELEPORT:      registerBestPlay("TP","no");return;
+         default: registerBestPlay(idToAbbrev(bestID),"Cheers love");return;
+      }
    }
 }
 
@@ -129,23 +107,23 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
             if (j) {
                if (!db) {
                   switch (j) {
-                     case 1: return abbrevToID("D2");
-                     case 2: return abbrevToID("D3");
-                     case 3: return abbrevToID("D4");
-                     case 4: return abbrevToID("D5");
+                     case 1: return DOUBLE_BACK_2;
+                     case 2: return DOUBLE_BACK_3;
+                     case 3: return DOUBLE_BACK_4;
+                     case 4: return DOUBLE_BACK_5;
                   }
                }
             } else {
                if ((!hide) && isLand(trail[j])) {
-                  return abbrevToID("HI");
+                  return HIDE;
                } else {
                   if (!db) {
-                     return abbrevToID("D1");
+                     return DOUBLE_BACK_1;
                   }
                }
             }
          }
       }
    }
-   return abbrevToID("TP");
+   return TELEPORT;
 }
