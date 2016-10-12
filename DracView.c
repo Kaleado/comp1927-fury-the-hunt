@@ -158,32 +158,7 @@ void giveMeTheTrail(DracView currentView, PlayerID player,
 
 // What are my (Dracula's) possible next moves (locations)
 LocationID *whereCanIgo(DracView currentView, int *numLocations, int road, int sea) {
-   int numLoc; 
-   LocationID trail[TRAIL_SIZE]; 
-   LocationID *adjacent = connectedLocations(currentView->game, &numLoc, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game), road, 0, sea); //possible locations for dracula
-   LocationID *locations  = malloc(sizeof(LocationID)*numLoc); //more than enough space. to be optimised properly!!
-
-   giveMeTheTrail(currentView, PLAYER_DRACULA, trail);
-   int inTrail;
-   int locationIndex = 0;
-   int i;
-   int d;
-   for(i=0;i<numLoc;i++) {
-      inTrail = FALSE;
-      for(d=0;d<TRAIL_SIZE;d++) {
-         if(adjacent[i] == trail[d]) {
-            inTrail = TRUE; //so we dont add it to the possible locations.
-	      }
-	   }
-      if(inTrail == FALSE)	{
-	      locations[locationIndex] = adjacent[i]; //not in the trail, add it to the possible locations. 
-	      locationIndex++;
-      }
-   }
-   *numLocations = locationIndex;
-   for (i = 0; i < numLoc; i++) printf("\n%s to %s, num = %d, blood = %d\n", idToAbbrev(getLocation(currentView->game,PLAYER_DRACULA)),idToAbbrev(adjacent[i]), i, getHealth(currentView->game, PLAYER_DRACULA));
-   free(adjacent); 
-   return locations;
+   return connectedLocations(currentView->game, numLocations, getLocation(currentView->game,PLAYER_DRACULA), PLAYER_DRACULA, getRound(currentView->game), road, 0, sea); //possible locations for dracula
 }
 
 // What are the specified player's next possible moves

@@ -57,42 +57,13 @@ void decideDraculaMove(DracView gameState)
    if(giveMeTheRound(gameState) == 0){
       registerBestPlay("DC","I want to be as far away from Geneva as possible!");
    } else {
-      int hide = 0, db = 0, i;
-      for (i=0; i<TRAIL_SIZE; i++) {
-         if (trail[i] == HIDE) hide = 1;
-         if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
-      }
-
-      if(numAdjacent == 0){
-         if (hide) {
-            if (db) {
-               registerBestPlay("TP","Oh no");
-            } else {
-               registerBestPlay("D1","Oh no");               
-            }
-            registerBestPlay("HI","Oh no");
-         }
-      } else {
-         int distance [numAdjacent][4];
-         all_distance(M,gameState,numAdjacent,adjacent,distance);
-         /*int i;
-         for (i = 0; i < numAdjacent; i++) {
-            printf ("ab = %d, %s\n", adjacent[i], idToAbbrev(adjacent[i]));
-         }*/
-         int nextID = best_nextPlace(distance,numAdjacent,trail,adjacent);
-         if (nextID == NOWHERE) {
-            if (hide) {
-               if (db) {
-                  registerBestPlay("TP","Oh no");
-               } else {
-                  registerBestPlay("D1","Oh no");               
-               }
-               registerBestPlay("HI","Oh no");
-            }
-         } else {
-            registerBestPlay(idToAbbrev(nextID),"far awayyyy");
-         }
-      }
+      int distance [numAdjacent][4];
+      all_distance(M,gameState,numAdjacent,adjacent,distance);
+      /*int i;
+      for (i = 0; i < numAdjacent; i++) {
+         printf ("ab = %d, %s\n", adjacent[i], idToAbbrev(adjacent[i]));
+      }*/
+      registerBestPlay(idToAbbrev(best_nextPlace(distance,numAdjacent,trail,adjacent)),"far awayyyy");
    }
 }
 
@@ -115,13 +86,12 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
    int temp[numAdjacent];
    int min[numAdjacent];
    int i, j, t, flag;
-//   int hide = 0, db = 0;
-/*
-   for (i=0; i<TRAIL_SIZE; i++) {
+   int hide = 0, db = 0;
+   for (i=0; i<TRAIL_SIZE-1; i++) {
       if (trail[i] == HIDE) hide = 1;
       if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
    }
-*/
+   // find shortest distance for each place
    for(i=0; i<numAdjacent; i++){
       temp[i] = distance[i][0];
       for(j=1; j<4; j++){
@@ -129,7 +99,7 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
       }
       min[i] = i;
    }
-
+   // sort places by distance
    for (i=numAdjacent-1; i>0; i--) {
       for (j=0; j<i; j++) {
          if(temp[j] < temp[j+1]) {
@@ -142,17 +112,45 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
          }
       }
    }
-   
+   // find normal places
    for (i=0; i<numAdjacent; i++) {
       flag = 1;
-      for (j=0; j<TRAIL_SIZE; j++) {
+      for (j=0; j<TRAIL_SIZE-1; j++) {
          if (trail[j] == adjacent[min[i]]) {
             flag = 0;
          }
-         //printf ("\nflag = %d, trail at %d, adjacent at %d, %d\n", flag, trail[j], temp[i], numAdjacent);
       }
       if (flag) return adjacent[min[i]];
    }
+   // find special places
+   for (i=0; i<numAdjacent; i++) {
+      flag = 1;
+      for (j=0; j<TRAIL_SIZE-1; j++) {
+         if (trail[j] == adjacent[min[i]]) {
+            if (j) {
+               if (!db) {
+                  switch (j) {
+                     case 1: return abbrevToID("D2");
+                     case 2: return abbrevToID("D3");
+                     case 3: return abbrevToID("D4");
+                     case 4: return abbrevToID("D5");
+                  }
+               }
+            } else {
+               if (!hide) {
+                  return abbrevToID("HI");
+               } else {
+                  if (!db) {
+                     return abbrevToID("D1");
+                  }
+               }
+            }
+         }
+
+      }
+      if (flag) return adjacent[min[i]];
+   }
+
 
    return NOWHERE;
 }
