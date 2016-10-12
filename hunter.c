@@ -11,7 +11,6 @@
 
 void decideHunterMove(HunterView gameState){
   PlayerID me = whoAmI(gameState);
-  char* here = idToAbbrev(whereIs(gameState, me));
   LocationID currentPath[NUM_MAP_LOCATIONS];
   srand(time(NULL));
   int numAdjacent;
@@ -37,7 +36,8 @@ void decideHunterMove(HunterView gameState){
       break;
     }
   }
-  else if(giveMeTheRound(gameState) % 8 == 1){
+  else if(giveMeTheRound(gameState) % 5 == 1){
+    char* here = idToAbbrev(whereIs(gameState, me));
     //We conduct research to find where Dracula is.
     registerBestPlay(here, "researching");
   }

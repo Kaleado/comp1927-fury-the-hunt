@@ -55,7 +55,8 @@ int main(int argc, char *argv[])
 #else
   HunterView gameState;
   //char *plays = "GAT.... SED.... HZU.... MZU.... DC?.... GVA.... SMN.... HMU.... MMR....";
-  char* plays = "GST.... SMA.... HSZ.... MSO.... DC?.V.. GFR.... SMA.... HKL.... MSO.... DSZT...";
+  //char* plays = "GST.... SMA.... HSZ.... MSO.... DC?.V..";// GFR.... SMA.... HKL.... MSO.... DSZT..
+  char* plays = "GST.... SMA.... HSZ.... MSO.... DBD.V.. GST.... SMA.... HSZ.... MSO.... DHIT...";
    PlayerMessage msgs[3] = { "", "", "" };
    gameState = newHunterView(plays,msgs);
    decideHunterMove(gameState);
