@@ -146,3 +146,21 @@ int abbrevToID(char *abbrev)
    }
    return NOWHERE;
 }
+
+//This function returns whether the given city is adjacent to the ocean.
+int isCoastalCity(LocationID loc){
+  int j;
+  //It must be a city.
+  if(!isLand(loc)){
+    return 0;
+  }
+  for(j = 0; j < NUM_MAP_LOCATIONS; j++){
+    if(loc == j){
+      continue;
+    }
+    if(isSea(j)){
+      return 1;
+    }
+  }
+  return 0;
+}

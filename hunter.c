@@ -10,6 +10,7 @@
 #include "HunterView.h"
 
 void decideHunterMove(HunterView gameState){
+  PlayerID me = whoAmI(gameState);
   LocationID currentPath[NUM_MAP_LOCATIONS];
   srand(time(NULL));
   int numAdjacent;
@@ -19,8 +20,21 @@ void decideHunterMove(HunterView gameState){
   int nextMoveInPath = 0;
   LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0, 0);
   //printf("numAdjacent: %d", numAdjacent);
-  if(giveMeTheRound(gameState) == 0){    
-    registerBestPlay("VI","I want to be as far away from Geneva as possible!");
+  if(giveMeTheRound(gameState) == 0){
+    switch(me){
+    case PLAYER_LORD_GODALMING:
+      registerBestPlay("ST","Lord Godalming: Strasbourg");
+      break;
+    case PLAYER_DR_SEWARD:
+      registerBestPlay("MA","Dr. Seward: Madrid");
+      break;
+    case PLAYER_VAN_HELSING:
+      registerBestPlay("SZ","Van Helsing: Szeged");
+      break;
+    case PLAYER_MINA_HARKER:
+      registerBestPlay("SO","Mina Harker: Sofia");
+      break;
+    }
   }
   else {
     //We update the path every three rounds.
@@ -43,7 +57,12 @@ void decideHunterMove(HunterView gameState){
       nextMoveInPath++;
     }
     else {
-      registerBestPlay(idToAbbrev(adjacent[rand() % numAdjacent]),"moving randomly");
+      if(numAdjacent == 0){
+	registerBestPlay(idToAbbrev(whereIs(gameState, me)), "waiting");
+      }
+      else {
+	registerBestPlay(idToAbbrev(adjacent[rand() % numAdjacent]),"moving randomly");
+      }
     }
   }
 }

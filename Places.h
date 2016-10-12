@@ -116,6 +116,8 @@ typedef int LocationID;
 #define UNKNOWN_LOCATION        -1
 #define NOWHERE                 UNKNOWN_LOCATION
 
+//Gets whether a location is a coastal city.
+int isCoastalCity(LocationID loc);
 
 // given a Place number, return its name
 char *idToName(int place);
