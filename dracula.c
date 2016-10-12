@@ -57,7 +57,7 @@ void decideDraculaMove(DracView gameState)
    if(giveMeTheRound(gameState) == 0){
       registerBestPlay("DC","I want to be as far away from Geneva as possible!");
    } else {
-      int hide = 0, db = 0;
+      int hide = 0, db = 0, i;
       for (i=0; i<TRAIL_SIZE; i++) {
          if (trail[i] == HIDE) hide = 1;
          if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
