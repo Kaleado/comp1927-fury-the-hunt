@@ -11,6 +11,7 @@
 
 void decideHunterMove(HunterView gameState){
   PlayerID me = whoAmI(gameState);
+  char* here = idToAbbrev(whereIs(gameState, me));
   LocationID currentPath[NUM_MAP_LOCATIONS];
   srand(time(NULL));
   int numAdjacent;
@@ -35,6 +36,10 @@ void decideHunterMove(HunterView gameState){
       registerBestPlay("SO","Mina Harker: Sofia");
       break;
     }
+  }
+  else if(giveMeTheRound(gameState) % 8 == 1){
+    //We conduct research to find where Dracula is.
+    registerBestPlay(here, "researching");
   }
   else {
     //We update the path every three rounds.
