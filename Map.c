@@ -375,7 +375,7 @@ int connections(Map g, LocationID start, LocationID end, TransportID type[])
 
 int edgePriority(LocationID source, LocationID destination, Map g){
   TransportID transportTypesAvailable[3];
-  if(connections(g, source, destination, &transportTypesAvailable[0]) == 1 && type[0] == ROAD){
+  if(connections(g, source, destination, &transportTypesAvailable[0]) == 1 && transportTypesAvailable[0] == ROAD){
     return 1;
   }
   return 0;
