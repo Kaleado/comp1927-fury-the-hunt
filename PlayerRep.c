@@ -1,4 +1,5 @@
 #include "PlayerRep.h"
+#include "stdio.h"
 
 Player newPlayer(int id){
   Player newPlayer = malloc(sizeof(struct playerRep));
@@ -60,13 +61,15 @@ int getPlayerHistory(Player p, LocationID* arr){
   int i;
   int queueSize = lengthQueue(p->history);
 
+  printf("agiajdog\n");
   for(i = TRAIL_SIZE - 1; i >= 0; i--){
-    if(i > queueSize - 1){
+    if(i >= queueSize - 1){
       arr[i] = UNKNOWN_LOCATION;
     }
     else {
       arr[i] = leaveQueue(p->history);
     }
+    printf("%d, ", arr[i]);
   }
   i = 0;
   while(arr[i] != UNKNOWN_LOCATION && i < TRAIL_SIZE){
