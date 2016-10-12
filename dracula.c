@@ -137,7 +137,7 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
                   }
                }
             } else {
-               if (!hide) {
+               if ((!hide) && isLand(trail[j])) {
                   return abbrevToID("HI");
                } else {
                   if (!db) {
