@@ -434,6 +434,7 @@ int findPath(Map gameMap, LocationID src, LocationID dest, int max, int *path)
   i = 0;
   cur = src;
   for(i = 0; cur != -1; i++){
+    printf("%s, ", idToAbbrev(cur));
     path[i] = cur;
     cur = pred[cur];
   }

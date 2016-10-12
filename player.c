@@ -46,15 +46,16 @@ static char latestMessage[MESSAGE_SIZE] = "";
 int main(int argc, char *argv[])
 {
 #ifdef I_AM_DRACULA
-   DracView gameState;
-   char *plays = "GVI.... SVI.... HVI.... MVI.... DAT.V.. GPR.... SPR.... HPR.... MPR.... DIO.... GBR.... SBR.... HBR.... MBR.... DBS.... GBR.... SBR.... HBR.... MBR.... DCNT... GBR.... SBR.... HBR.... MBR.... DVRT... GBR.... SBR.... HBR.... MBR.... DSOT... GBR.... SBR.... HBR.... MBR.... DSAT.V. GBR.... SBR.... HBR.... MBR.... DVAT... GBR.... SBR.... HBR.... MBR.... DATT... GBR.... SBR.... HBR.... MBR.... DIO..M. GBR.... SBR.... HBR.... MBR.... DBS..M. GBR.... SBR.... HBR.... MBR.... DCNT.M. GBR.... SBR.... HBR.... MBR.... DVRT.M. GBR.... SBR.... HBR.... MBR.... DSO.VM. GBR.... SBR.... HBR.... MBR.... DSAT.M. GBR.... SBR.... HBR.... MBR.... DVAT... GBR.... SBR.... HBR.... MBR.... DATT... GBR.... SBR.... HBR.... MBR.... DIO..M. GBR.... SBR.... HBR.... MBR.... DBS..M. GBR.... SBR.... HBR.... MBR.... DCNT.V. GBR.... SBR.... HBR.... MBR.... DVRT.M. GBR.... SBR.... HBR.... MBR.... DSOT.M. GBR.... SBR.... HBR.... MBR.... DBET.M. GHA.... SHA.... HHA.... MHA.... DSJT... GCO.... SCO.... HCO.... MCO....";
-   PlayerMessage msgs[3] = { "", "", "" };
-   gameState = newDracView(plays,msgs);
-   decideDraculaMove(gameState);
-   disposeDracView(gameState);
+  DracView gameState;
+  char *plays = "GVI.... SVI.... HVI.... MVI.... DAT.V.. GPR.... SPR.... HPR.... MPR.... DIO.... GBR.... SBR.... HBR.... MBR.... DBS.... GBR.... SBR.... HBR.... MBR.... DCNT... GBR.... SBR.... HBR.... MBR.... DVRT... GBR.... SBR.... HBR.... MBR.... DSOT... GBR.... SBR.... HBR.... MBR.... DSAT.V. GBR.... SBR.... HBR.... MBR.... DVAT... GBR.... SBR.... HBR.... MBR.... DATT... GBR.... SBR.... HBR.... MBR.... DIO..M. GBR.... SBR.... HBR.... MBR.... DBS..M. GBR.... SBR.... HBR.... MBR.... DCNT.M. GBR.... SBR.... HBR.... MBR.... DVRT.M. GBR.... SBR.... HBR.... MBR.... DSO.VM. GBR.... SBR.... HBR.... MBR.... DSAT.M. GBR.... SBR.... HBR.... MBR.... DVAT... GBR.... SBR.... HBR.... MBR.... DATT... GBR.... SBR.... HBR.... MBR.... DIO..M. GBR.... SBR.... HBR.... MBR.... DBS..M. GBR.... SBR.... HBR.... MBR.... DCNT.V. GBR.... SBR.... HBR.... MBR.... DVRT.M. GBR.... SBR.... HBR.... MBR.... DSOT.M. GBR.... SBR.... HBR.... MBR.... DBET.M. GHA.... SHA.... HHA.... MHA.... DSJT... GCO.... SCO.... HCO.... MCO....";
+  PlayerMessage msgs[3] = { "", "", "" };
+  gameState = newDracView(plays,msgs);
+  decideDraculaMove(gameState);
+  disposeDracView(gameState);
 #else
-   HunterView gameState;
-   char *plays = "GAT.... SED.... HZU.... MZU.... DC?.... GVA.... SMN.... HMU.... MMR....";
+  HunterView gameState;
+  //char *plays = "GAT.... SED.... HZU.... MZU.... DC?.... GVA.... SMN.... HMU.... MMR....";
+  char* plays = "GST.... SMA.... HSZ.... MSO.... DC?.V.. GFR.... SMA.... HKL.... MSO.... DSZT...";
    PlayerMessage msgs[3] = { "", "", "" };
    gameState = newHunterView(plays,msgs);
    decideHunterMove(gameState);

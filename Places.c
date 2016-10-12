@@ -96,7 +96,6 @@ static Place places[] =
 // given a Place number, return its abbreviation
 char *idToAbbrev(LocationID p)
 {
-  printf("locid: %d", p);
   assert(validPlace(p));
   return places[p].abbrev;
 }

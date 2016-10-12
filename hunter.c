@@ -38,7 +38,7 @@ void decideHunterMove(HunterView gameState){
   }
   else {
     //We update the path every three rounds.
-    if(giveMeTheRound(gameState) % 3 == 0){
+    if(giveMeTheRound(gameState) % 1 == 0){
       LocationID trail[TRAIL_SIZE];
       giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
       for(i = 0; trail[i] != -1; i++){
@@ -49,7 +49,7 @@ void decideHunterMove(HunterView gameState){
       }
       if(firstValid != -1){
 	pathLength = findMeAPath(gameState, firstValid, currentPath);
-	nextMoveInPath = 0;
+	nextMoveInPath = 1;
       }
     }
     if(nextMoveInPath < pathLength){

@@ -240,7 +240,7 @@ void getHistory(GameView currentView, PlayerID player,
 
 //Finds a path from player's location to the destination.
 int findPathTo(GameView currentView, LocationID destination, PlayerID player, LocationID* path){
-  return findPath(currentView->gameMap, getLocation(currentView, player), destination, 1, path);
+  return findPath(currentView->gameMap, getLocation(currentView, player), destination, 100, path);
 }
 
 // Returns an array of LocationIDs for all directly connected locations
