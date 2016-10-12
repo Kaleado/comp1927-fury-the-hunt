@@ -124,7 +124,6 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
    }
    // find special places
    for (i=0; i<numAdjacent; i++) {
-      flag = 1;
       for (j=0; j<TRAIL_SIZE-1; j++) {
          if (trail[j] == adjacent[min[i]]) {
             if (j) {
@@ -146,11 +145,7 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
                }
             }
          }
-
       }
-      if (flag) return adjacent[min[i]];
    }
-
-
-   return NOWHERE;
+   return abbrevToID("TP");
 }
