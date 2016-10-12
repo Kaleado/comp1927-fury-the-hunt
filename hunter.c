@@ -18,7 +18,7 @@ void decideHunterMove(HunterView gameState){
   int i;
   int firstValid = -1;
   int nextMoveInPath = 0;
-  LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0, 0);
+  LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 0, 1);
   //printf("numAdjacent: %d", numAdjacent);
   if(giveMeTheRound(gameState) == 0){
     switch(me){
@@ -43,7 +43,7 @@ void decideHunterMove(HunterView gameState){
   }
   else {
     //We update the path every three rounds.
-    if(giveMeTheRound(gameState) % 1 == 0){
+    if(giveMeTheRound(gameState) % 3 == 2){
       LocationID trail[TRAIL_SIZE];
       giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
       for(i = 0; trail[i] != -1; i++){
