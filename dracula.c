@@ -19,6 +19,8 @@ void decideDraculaMove(DracView gameState)
    LocationID trail[TRAIL_SIZE];
    LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
+
+   // random version
    /*
    int hide = 0, db = 0,i;
 
@@ -47,16 +49,29 @@ void decideDraculaMove(DracView gameState)
    }
    return;
    */
-   // move with strategy leads to illegal move in dryrun
-   // make
+
+   // Logically moving version
    Map M = newMap();
 
    //printf("numAdjacent: %d", numAdjacent);
    if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("AT","I want to be as far away from Geneva as possible!");
+      registerBestPlay("DC","I want to be as far away from Geneva as possible!");
    } else {
+      int hide = 0, db = 0;
+      for (i=0; i<TRAIL_SIZE; i++) {
+         if (trail[i] == HIDE) hide = 1;
+         if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
+      }
+
       if(numAdjacent == 0){
-         registerBestPlay("TP","Oh no");
+         if (hide) {
+            if (db) {
+               registerBestPlay("TP","Oh no");
+            } else {
+               registerBestPlay("D1","Oh no");               
+            }
+            registerBestPlay("HI","Oh no");
+         }
       } else {
          int distance [numAdjacent][4];
          all_distance(M,gameState,numAdjacent,adjacent,distance);
@@ -66,7 +81,14 @@ void decideDraculaMove(DracView gameState)
          }*/
          int nextID = best_nextPlace(distance,numAdjacent,trail,adjacent);
          if (nextID == NOWHERE) {
-            registerBestPlay("TP","Oh no");
+            if (hide) {
+               if (db) {
+                  registerBestPlay("TP","Oh no");
+               } else {
+                  registerBestPlay("D1","Oh no");               
+               }
+               registerBestPlay("HI","Oh no");
+            }
          } else {
             registerBestPlay(idToAbbrev(nextID),"far awayyyy");
          }
@@ -134,4 +156,3 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
 
    return NOWHERE;
 }
-
