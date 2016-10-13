@@ -30,7 +30,7 @@ void setPlayerLocation(Player, LocationID);
 
 void setPlayerHealth(Player p, int newHealth);
 
-void damagePlayer(Player p, int amt);
+int damagePlayer(Player p, int amt);
 
 void addToPlayerHistory(Player p, LocationID loc);
 

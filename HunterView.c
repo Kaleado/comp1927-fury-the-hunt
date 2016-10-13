@@ -130,7 +130,7 @@ void giveMeTheTrail(HunterView currentView, PlayerID player,
 
 //Finds a path (stored in path) to the given destination. The path length is returned as an integer.
 int findMeAPath(HunterView currentView, LocationID destination, LocationID* path){
-  PlayerID me = whoAmI(currentView);
+  PlayerID me = getCurrentPlayer(currentView->game);
   return findPathTo(currentView->game, destination, me, path);
 }
 
