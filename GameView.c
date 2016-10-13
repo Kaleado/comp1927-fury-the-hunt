@@ -92,10 +92,6 @@ void executeMove(GameView gv, char* move){
   else {
     getPlayerHistory(gv->players[playerID], hist);
     newLocation = abbrevToID(locationAbbr);
-    //If the player rested in a city.
-    if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
-      damagePlayer(gv->players[playerID], -3);
-    }
     addToPlayerHistory(gv->players[playerID], newLocation);
     //We determine if the character was at sea.
     if(newLocation == SEA_UNKNOWN || (validPlace(newLocation) && isSea(newLocation)) ){
@@ -139,6 +135,10 @@ void executeMove(GameView gv, char* move){
     gv->currentPlayer = 0;
     gv->round++;
   }
+   //If the player rested in a city.
+   if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
+   damagePlayer(gv->players[playerID], -3);
+   }
   return;
 }
 
