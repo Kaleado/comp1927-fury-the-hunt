@@ -140,6 +140,10 @@ void executeMove(GameView gv, char* move){
     gv->currentPlayer = 0;
     gv->round++;
   }
+   //If the player rested in a city.
+   if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
+   damagePlayer(gv->players[playerID], -3);
+   }
   return;
 }
 
