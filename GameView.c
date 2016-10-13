@@ -56,6 +56,8 @@ void executeMove(GameView gv, char* move){
     playerID = PLAYER_DRACULA;
     break;        
   }
+
+  getPlayerHistory(gv->players[playerID], hist);
   
   //We first set the character's new location.
   //If the character has moved to an unknown location.
@@ -90,12 +92,7 @@ void executeMove(GameView gv, char* move){
   }
   //Otherwise, for any other valid location.
   else {
-    getPlayerHistory(gv->players[playerID], hist);
     newLocation = abbrevToID(locationAbbr);
-    //If the player rested in a city.
-    if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
-      damagePlayer(gv->players[playerID], -3);
-    }
     addToPlayerHistory(gv->players[playerID], newLocation);
     //We determine if the character was at sea.
     if(newLocation == SEA_UNKNOWN || (validPlace(newLocation) && isSea(newLocation)) ){
@@ -131,6 +128,10 @@ void executeMove(GameView gv, char* move){
   //Dracula regains 10 blood if he's at his castle and not dead.
   if(playerID == PLAYER_DRACULA && newLocation == 17 && getPlayerHealth(gv->players[PLAYER_DRACULA]) > 0) {
     setPlayerHealth(gv->players[PLAYER_DRACULA], getPlayerHealth(gv->players[PLAYER_DRACULA])+10);
+  }
+  //If the player rested in a city.
+  if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
+    damagePlayer(gv->players[playerID], -3);
   }
 
   //We move to the next player.
