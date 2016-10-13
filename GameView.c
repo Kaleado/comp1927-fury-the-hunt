@@ -61,12 +61,10 @@ void executeMove(GameView gv, char* move){
   //If the character has moved to an unknown location.
   if(locationAbbr[0] == 'C' && locationAbbr[1] == '?'){
     newLocation = CITY_UNKNOWN;
-    addToPlayerHistory(gv->players[playerID], newLocation);
     isAtSea = 0;
   }
   else if(locationAbbr[0] == 'S' && locationAbbr[1] == '?'){
     newLocation = SEA_UNKNOWN;
-    addToPlayerHistory(gv->players[playerID], newLocation);
     isAtSea = 1;
   }
   //If the character has doubled back (i.e. for Dracula only).
@@ -80,19 +78,15 @@ void executeMove(GameView gv, char* move){
       isAtSea = 1;
     }
     newLocation = DOUBLE_BACK_1+locationAbbr[1]-'1';
-    addToPlayerHistory(gv->players[playerID], newLocation);
   } 
   //If TP
   else if(locationAbbr[0] == 'T' && locationAbbr[1] == 'P') {
     newLocation = 17;
-    addToPlayerHistory(gv->players[playerID], newLocation);
     isAtSea = 0;
   }
   //Otherwise, for any other valid location.
   else {
-    getPlayerHistory(gv->players[playerID], hist);
     newLocation = abbrevToID(locationAbbr);
-    addToPlayerHistory(gv->players[playerID], newLocation);
     //We determine if the character was at sea.
     if(newLocation == SEA_UNKNOWN || (validPlace(newLocation) && isSea(newLocation)) ){
       isAtSea = 1;
@@ -128,6 +122,11 @@ void executeMove(GameView gv, char* move){
   if(playerID == PLAYER_DRACULA && newLocation == 17 && getPlayerHealth(gv->players[PLAYER_DRACULA]) > 0) {
     setPlayerHealth(gv->players[PLAYER_DRACULA], getPlayerHealth(gv->players[PLAYER_DRACULA])+10);
   }
+   //If the player rested in a city.
+  if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
+    damagePlayer(gv->players[playerID], -3);
+  }
+  addToPlayerHistory(gv->players[playerID], newLocation);
 
   //We move to the next player.
   gv->currentPlayer++;
@@ -135,10 +134,6 @@ void executeMove(GameView gv, char* move){
     gv->currentPlayer = 0;
     gv->round++;
   }
-   //If the player rested in a city.
-   if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
-   damagePlayer(gv->players[playerID], -3);
-   }
   return;
 }
 
