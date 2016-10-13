@@ -23,7 +23,7 @@ void decideDraculaMove(DracView gameState)
    // Logically moving version
    Map M = newMap();
    if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("DC","I want to be as far away from Geneva as possible!");
+      registerBestPlay("MA","I was on VACTION!!");
    } else {
       int distance [numAdjacent][4];
       all_distance(M,gameState,numAdjacent,adjacent,distance);
