@@ -90,7 +90,12 @@ void executeMove(GameView gv, char* move){
   }
   //Otherwise, for any other valid location.
   else {
+    getPlayerHistory(gv->players[playerID], hist);
     newLocation = abbrevToID(locationAbbr);
+    //If the player rested in a city.
+    if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
+      damagePlayer(gv->players[playerID], -3);
+    }
     addToPlayerHistory(gv->players[playerID], newLocation);
     //We determine if the character was at sea.
     if(newLocation == SEA_UNKNOWN || (validPlace(newLocation) && isSea(newLocation)) ){
@@ -106,11 +111,14 @@ void executeMove(GameView gv, char* move){
   }
   //We examine all of the events given in the action string.
   if(playerID != PLAYER_DRACULA) {
-    for(i = 0; i < 4; i++){
+    int finished = 0;
+    for(i = 0; i < 4 && !finished; i++){
       switch(events[i]){
       case 'T':
         //Trap.
-        damagePlayer(gv->players[playerID], 2);
+        if(damagePlayer(gv->players[playerID], 2)){
+	  finished = 1;
+	}
         break;
       case 'D':
         //Dracula.

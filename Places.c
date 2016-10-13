@@ -1,4 +1,4 @@
-// Places ... implementation of Places
+//Places ... implementation of Places
 
 #include <stdlib.h>
 #include <assert.h>

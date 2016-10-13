@@ -30,12 +30,17 @@ void setPlayerHealth(Player p, int newHealth){
   return;
 }
 
-void damagePlayer(Player p, int amt){
+int damagePlayer(Player p, int amt){
   p->health -= amt;
   if(p->health <= 0){
     setPlayerLocation(p, ST_JOSEPH_AND_ST_MARYS);
+    p->health = 9;
+    return 1;
   }
-  return;
+  if(p->health > 9 && p->id != PLAYER_DRACULA){
+    p->health = 9;
+  }
+  return 0;
 }
 
 LocationID getPlayerLocation(Player p){
