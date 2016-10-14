@@ -51,7 +51,10 @@ void decideHunterMove(HunterView gameState){
   char msg[50];
   LocationID trail[TRAIL_SIZE];
   int pathLength = 0;
-  
+  //int j;
+  giveMeTheTrail(gameState, me, trail);
+  //for (j=0; j<TRAIL_SIZE; j++) printf ("*%s* ", idToAbbrev(trail[j]));
+  printf ("hp = %d\n", howHealthyIs(gameState, me));
   //We must handle when there is a double back.
   while(draculasWhereabouts >= DOUBLE_BACK_1 && draculasWhereabouts <= DOUBLE_BACK_5){
     giveMeTheTrail(gameState, PLAYER_DRACULA, trail);

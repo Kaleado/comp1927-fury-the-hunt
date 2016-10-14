@@ -110,13 +110,11 @@ void executeMove(GameView gv, char* move){
       switch(events[i]){
       case 'T':
         //Trap.
-        if(damagePlayer(gv->players[playerID], 2)){
-	  dead = 1;
-	}
+        dead = damagePlayer(gv->players[playerID], 2);
         break;
       case 'D':
         //Dracula.
-        damagePlayer(gv->players[playerID], 4);
+        dead = damagePlayer(gv->players[playerID], 4);
         damagePlayer(gv->players[PLAYER_DRACULA], 10);
         break;
       }
@@ -131,8 +129,13 @@ void executeMove(GameView gv, char* move){
     damagePlayer(gv->players[playerID], -3);
   }
   //We update the player's location.
-  setPlayerLocation(gv->players[playerID], newLocation);
-  addToPlayerHistory(gv->players[playerID], newLocation);
+  if(dead) {
+    setPlayerLocation(gv->players[playerID], newLocation);
+    addToPlayerHistory(gv->players[playerID], newLocation);
+  } else {
+    setPlayerLocation(gv->players[playerID], ST_JOSEPH_AND_ST_MARYS);
+    addToPlayerHistory(gv->players[playerID], ST_JOSEPH_AND_ST_MARYS);
+  }
 
   //if(playerID == PLAYER_DRACULA) printf ("*%s* ", idToAbbrev(newLocation));
   //We move to the next player.
