@@ -65,6 +65,7 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
    int min[numAdjacent];
    int i, j, t, flag;
    int hide = 0, db = 0;
+   for (j=0; j<TRAIL_SIZE; j++) printf ("*%s* ", idToAbbrev(trail[j]));
    for (i=0; i<TRAIL_SIZE-1; i++) {
       if (trail[i] == HIDE) hide = 1;
       if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
@@ -90,7 +91,6 @@ static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[T
          }
       }
    }
-   for (j=0; j<TRAIL_SIZE; j++) printf ("*%s* ", idToAbbrev(trail[j]));
    // find normal places
    for (i=0; i<numAdjacent; i++) {
       flag = 1;

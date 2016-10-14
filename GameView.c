@@ -56,7 +56,9 @@ void executeMove(GameView gv, char* move){
     playerID = PLAYER_DRACULA;
     break;        
   }
-  
+
+  getPlayerHistory(gv->players[playerID], hist);
+
   //We first set the character's new location.
   //If the character has moved to an unknown location.
   if(locationAbbr[0] == 'C' && locationAbbr[1] == '?'){
@@ -71,7 +73,6 @@ void executeMove(GameView gv, char* move){
   else if(locationAbbr[0] == 'D' && locationAbbr[1] >= '1' && locationAbbr[1] <= '5'){
     index = locationAbbr[1] - '1';//We get the index of the place that Dracula is doubling back to.
     //We retrieve the player's history into the hist[] array.
-    getPlayerHistory(gv->players[playerID], hist);
     //    printf("hist[index] = %d", hist[index]);
     //We determine if the character was at sea.
     if(hist[index] == SEA_UNKNOWN || (validPlace(hist[index]) && isSea(hist[index])) ){
@@ -92,8 +93,6 @@ void executeMove(GameView gv, char* move){
       isAtSea = 1;
     }
   }
-  //We update the player's location.
-  setPlayerLocation(gv->players[playerID], newLocation);
 
   //Dracula takes damage if he is at sea.
   if(playerID == PLAYER_DRACULA && isAtSea ){
@@ -120,14 +119,17 @@ void executeMove(GameView gv, char* move){
   }
   //Dracula regains 10 blood if he's at his castle and not dead.
   if(playerID == PLAYER_DRACULA && newLocation == 17 && getPlayerHealth(gv->players[PLAYER_DRACULA]) > 0) {
-    setPlayerHealth(gv->players[PLAYER_DRACULA], getPlayerHealth(gv->players[PLAYER_DRACULA])+10);
+    damagePlayer(gv->players[playerID], -10);
   }
    //If the player rested in a city.
   if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
     damagePlayer(gv->players[playerID], -3);
   }
+  //We update the player's location.
+  setPlayerLocation(gv->players[playerID], newLocation);
   addToPlayerHistory(gv->players[playerID], newLocation);
 
+  //if(playerID == PLAYER_DRACULA) printf ("*%s* ", idToAbbrev(newLocation));
   //We move to the next player.
   gv->currentPlayer++;
   if(gv->currentPlayer >= NUM_PLAYERS){
