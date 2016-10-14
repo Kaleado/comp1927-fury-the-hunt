@@ -129,7 +129,7 @@ void executeMove(GameView gv, char* move){
     damagePlayer(gv->players[playerID], -3);
   }
   //We update the player's location.
-  if(dead) {
+  if(!dead) {
     setPlayerLocation(gv->players[playerID], newLocation);
     addToPlayerHistory(gv->players[playerID], newLocation);
   } else {
