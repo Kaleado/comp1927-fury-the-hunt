@@ -22,8 +22,6 @@ struct MapRep {
    VList connections[NUM_MAP_LOCATIONS]; // array of lists
 };
 
-static void addConnections(Map);
-
 // Create a new empty graph (for a map)
 // #Vertices always same as NUM_PLACES
 Map newMap()
@@ -135,7 +133,7 @@ int numE(Map g, TransportID type)
 }
 
 // Add edges to Graph representing map of Europe
-static void addConnections(Map g)
+void addConnections(Map g)
 {
    //### ROAD Connections ###
 
@@ -371,6 +369,34 @@ int connections(Map g, LocationID start, LocationID end, TransportID type[])
     }
   }
   return i;
+}
+
+int getAdjacent(Map g, LocationID start, LocationID* adjacent){
+  assert(g!=NULL);
+  if(start > MAX_MAP_LOCATION || start < MIN_MAP_LOCATION){
+    return 0;
+  }
+  VList c;//, d;
+  int i = 0;
+  for(c = g->connections[start]; c != NULL; c = c->next){
+    adjacent[i] = c->v;
+    i++;
+  }
+  return i;  
+}
+
+int isAdjacent(Map g, LocationID start, LocationID end){
+  assert(g!=NULL);
+  if(start > MAX_MAP_LOCATION || start < MIN_MAP_LOCATION || end > MAX_MAP_LOCATION || end < MIN_MAP_LOCATION){
+    return 0;
+  }
+  VList c;//, d;
+  for(c = g->connections[start]; c != NULL; c = c->next){
+    if(c->v == end){
+      return 1;
+    }
+  }
+  return 0;  
 }
 
 int edgePriority(LocationID source, LocationID destination, Map g){

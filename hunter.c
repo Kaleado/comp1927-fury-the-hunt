@@ -95,10 +95,10 @@ void decideHunterMove(HunterView gameState){
     }
   }
   //We conduct research every six rounds so we have an idea of where Dracula is (granted we don't already do).
-  else if(giveMeTheRound(gameState) % 6 == 1){
+  else if(giveMeTheRound(gameState) % 6 == 0){
     strcpy(msg, "Waiting and conducting research.");
     registerBestPlay(idToAbbrev(here(gameState)), msg);
-  }  
+  }
   //If we don't know where Dracula is...
   else if(!isKnown(draculasWhereabouts)){
     //...but we know he's in a city.

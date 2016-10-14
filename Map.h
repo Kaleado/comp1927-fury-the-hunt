@@ -24,4 +24,8 @@ int  numE(Map g, TransportID t);
 int connections(Map, LocationID, LocationID, TransportID[]);
 int findPath(Map, LocationID, LocationID, int, int*);
 int  getlen(Map g, LocationID start, LocationID to);
+int getAdjacent(Map g, LocationID start, LocationID* adjacent);
+int isAdjacent(Map g, LocationID start, LocationID end);
+void addConnections(Map);
+
 #endif
