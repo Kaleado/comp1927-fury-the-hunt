@@ -37,6 +37,7 @@ void executeMove(GameView gv, char* move){
   int i;//Used as a counter.
   int index;//Used to store the index of the move that the player has doubled back to (for Dracula).
   LocationID hist[TRAIL_SIZE];//Used to store the player's history.
+  int dead = 0;
 
   //We discern the player executing the move.
   switch(playerAbbr){
@@ -100,13 +101,12 @@ void executeMove(GameView gv, char* move){
   }
   //We examine all of the events given in the action string.
   if(playerID != PLAYER_DRACULA) {
-    int finished = 0;
-    for(i = 0; i < 4 && !finished; i++){
+    for(i = 0; i < 4 && !dead; i++){
       switch(events[i]){
       case 'T':
         //Trap.
         if(damagePlayer(gv->players[playerID], 2)){
-	  finished = 1;
+	  dead = 1;
 	}
         break;
       case 'D':
@@ -122,7 +122,7 @@ void executeMove(GameView gv, char* move){
     damagePlayer(gv->players[playerID], -10);
   }
    //If the player rested in a city.
-  if(hist[0] == newLocation && playerID != PLAYER_DRACULA){
+  if(!dead && hist[0] == newLocation && playerID != PLAYER_DRACULA){
     damagePlayer(gv->players[playerID], -3);
   }
   //We update the player's location.

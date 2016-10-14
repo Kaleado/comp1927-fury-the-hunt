@@ -26,21 +26,6 @@ LocationID getRandomMove(HunterView gameState){
 }
 
 LocationID getCoastalTown(PlayerID player){
-  /*
-  LocationID coastalTowns[NUM_MAP_LOCATIONS];
-  int i, numTowns;
-  numTowns = 0;
-  for(i = 0; i < NUM_MAP_LOCATIONS; i++){
-    if(isCoastalCity(i)){
-      coastalTowns[numTowns] = i;
-      numTowns++;
-    }
-  }
-  if(numTowns == 0){
-    return UNKNOWN_LOCATION;
-  }
-  return coastalTowns[rand()%numTowns];
-  */
   switch(player){
   case PLAYER_LORD_GODALMING:
     return VENICE;
