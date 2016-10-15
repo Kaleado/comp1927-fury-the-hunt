@@ -89,7 +89,9 @@ void executeMove(GameView gv, char* move){
   //If Hide
   else if(locationAbbr[0] == 'H' && locationAbbr[1] == 'I') {
     newLocation = hist[0];
-    isAtSea = isSea(newLocation)?1:0;
+    if(hist[0] == SEA_UNKNOWN || (validPlace(hist[0]) && isSea(hist[0])) ){
+      isAtSea = 1;
+    }
   }
   //Otherwise, for any other valid location.
   else {
