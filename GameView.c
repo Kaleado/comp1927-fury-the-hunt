@@ -135,7 +135,7 @@ void executeMove(GameView gv, char* move){
   }
   //We update the player's location.
   if(!dead) {
-    if(playerID == PLAYER_DRACULA) printf ("*%d | %s | ", newLocation, locationAbbr);
+    //if(playerID == PLAYER_DRACULA) printf ("*%d | %s | ", newLocation, locationAbbr);
     setPlayerLocation(gv->players[playerID], newLocation);
     if(locationAbbr[0] == 'H' && locationAbbr[1] == 'I') {
       addToPlayerHistory(gv->players[playerID], HIDE);
@@ -151,7 +151,7 @@ void executeMove(GameView gv, char* move){
     addToPlayerHistory(gv->players[playerID], ST_JOSEPH_AND_ST_MARYS);
   }
 
-  if(playerID == PLAYER_DRACULA) printf ("%s* \n", idToAbbrev(newLocation));
+  //if(playerID == PLAYER_DRACULA) printf ("%s* \n", idToAbbrev(newLocation));
   //We move to the next player.
   gv->currentPlayer++;
   if(gv->currentPlayer >= NUM_PLAYERS){

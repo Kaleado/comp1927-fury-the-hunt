@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "GameView.h"
 #include "DracView.h"
+#include "Places.h"
 #include "Map.h"
 #include "Queue.h"
 #include "PlayerRep.h"
@@ -47,6 +48,9 @@ DracView newDracView(char *pastPlays, PlayerMessage messages[]) {
       name[0] = pastPlays[where+1];
       name[1] = pastPlays[where+2];
       loc = abbrevToID(name);
+      if (loc == NOWHERE) {
+         loc = findLoc(name, pastPlays, where);
+      }
       if (player!=PLAYER_DRACULA) {
          if (lastLocation[player] == loc) {
             dracView->rest[player] = 1;
@@ -179,4 +183,28 @@ LocationID *whereCanTheyGo(DracView currentView, int *numLocations,
    }
 
    return locations;
+}
+
+LocationID findLoc(char *name, char *pastPlays, int where){
+   LocationID loc;
+   if (name[0] == 'T' && name[1] == 'P') {
+      loc =  CASTLE_DRACULA;
+   }
+   if (name[0] == 'H' && name[1] == 'I') {
+      name[0] = pastPlays[where+1-8];
+      name[1] = pastPlays[where+2-8];
+      loc = abbrevToID(name);
+      if (loc == NOWHERE) {
+         return findLoc(name, pastPlays, where-8);
+      }
+   }
+   if (name[0] == 'D' && name[1] >= '1' && name[1] <= '5') {
+      name[0] = pastPlays[where+1-8*(name[1]-'0')];
+      name[1] = pastPlays[where+2-8*(name[1]-'0')];
+      loc = abbrevToID(name);
+      if (loc == NOWHERE) {
+         return findLoc(name, pastPlays, where-8*(name[1]-'0'));
+      }
+   }
+   return loc;
 }
