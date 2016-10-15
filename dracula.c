@@ -10,7 +10,7 @@
 #include "Places.h"
 
 static void all_distance(Map g, DracView gameState, int numLocations, LocationID *Next_Place, int distance[][4]);
-static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent);
+static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent, int hide, int db);
 
 void decideDraculaMove(DracView gameState)
 {
@@ -19,7 +19,19 @@ void decideDraculaMove(DracView gameState)
    LocationID trail[TRAIL_SIZE];
    LocationID* adjacent = whereCanIgo(gameState, &numAdjacent, 1, 1);
    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
-
+   int i;
+   int hide = 0, db = 0;
+   for (i=0; i<TRAIL_SIZE-1; i++) {
+      if (trail[i] == HIDE) {
+         hide = 1;
+         trail[i] = (i)?trail[i]:trail[i+1];
+      }
+      if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) {
+         db = 1;
+         trail[i] = (i)?trail[i]:trail[trail[i]-DOUBLE_BACK_1+1];
+      }
+   }
+   //for (j=0; j<TRAIL_SIZE; j++) printf ("*%2d* ", trail[j]);
    // Logically moving version
    Map M = newMap();
    if(giveMeTheRound(gameState) == 0){
@@ -31,7 +43,7 @@ void decideDraculaMove(DracView gameState)
       for (i = 0; i < numAdjacent; i++) {
          printf ("ab = %d, %s\n", adjacent[i], idToAbbrev(adjacent[i]));
       }*/
-      LocationID bestID = best_nextPlace(distance,numAdjacent,trail,adjacent);
+      LocationID bestID = best_nextPlace(distance,numAdjacent,trail,adjacent,hide,db);
       switch (bestID) {
          case DOUBLE_BACK_1: registerBestPlay("D1","no");return;
          case DOUBLE_BACK_2: registerBestPlay("D2","no");return;
@@ -57,19 +69,16 @@ static void all_distance(Map g, DracView gameState, int numLocations, LocationID
 		distance[i][1] = getlen(g,Next_Place[i],Hunter_DS);
 		distance[i][2] = getlen(g,Next_Place[i],Hunter_VH);
 		distance[i][3] = getlen(g,Next_Place[i],Hunter_MH);
+      //printf ("*%s* ", idToAbbrev(Next_Place[i]));
 	}
+   //printf ("\n");
 }
 
-static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent){
+static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent, int hide, int db){
    int temp[numAdjacent];
    int min[numAdjacent];
    int i, j, t, flag;
-   int hide = 0, db = 0;
-   //for (j=0; j<TRAIL_SIZE; j++) printf ("*%2d* ", trail[j]);
-   for (i=0; i<TRAIL_SIZE-1; i++) {
-      if (trail[i] == HIDE) hide = 1;
-      if (trail[i]<=DOUBLE_BACK_5 && trail[i]>=DOUBLE_BACK_1) db = 1;
-   }
+
    // find shortest distance for each place
    for(i=0; i<numAdjacent; i++){
       temp[i] = distance[i][0];

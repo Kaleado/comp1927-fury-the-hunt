@@ -79,7 +79,7 @@ void executeMove(GameView gv, char* move){
     if(hist[index] == SEA_UNKNOWN || (validPlace(hist[index]) && isSea(hist[index])) ){
       isAtSea = 1;
     }
-    newLocation = DOUBLE_BACK_1+locationAbbr[1]-'1';
+    newLocation = (hist[locationAbbr[1]-'1'] == HIDE)?hist[locationAbbr[1]-'1'+1]:hist[locationAbbr[1]-'1'];
   } 
   //If TP
   else if(locationAbbr[0] == 'T' && locationAbbr[1] == 'P') {
