@@ -31,7 +31,8 @@ void decideDraculaMove(DracView gameState)
          trail[i] = (i)?trail[i]:trail[trail[i]-DOUBLE_BACK_1+1];
       }
    }
-   //for (j=0; j<TRAIL_SIZE; j++) printf ("*%2d* ", trail[j]);
+   int j;
+   for (j=0; j<TRAIL_SIZE; j++) printf ("*%2d* ", trail[j]);
    // Logically moving version
    Map M = newMap();
    if(giveMeTheRound(gameState) == 0){

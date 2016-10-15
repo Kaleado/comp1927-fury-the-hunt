@@ -76,6 +76,8 @@ void executeMove(GameView gv, char* move){
     //We retrieve the player's history into the hist[] array.
     //    printf("hist[index] = %d", hist[index]);
     //We determine if the character was at sea.
+    //if(playerID == PLAYER_DRACULA) printf ("*%s* ", locationAbbr);
+    
     if(hist[index] == SEA_UNKNOWN || (validPlace(hist[index]) && isSea(hist[index])) ){
       isAtSea = 1;
     }
@@ -83,13 +85,14 @@ void executeMove(GameView gv, char* move){
   } 
   //If TP
   else if(locationAbbr[0] == 'T' && locationAbbr[1] == 'P') {
-    newLocation = 17;
+    newLocation = CASTLE_DRACULA;
     isAtSea = 0;
   }
   //If Hide
   else if(locationAbbr[0] == 'H' && locationAbbr[1] == 'I') {
-    newLocation = hist[0];
-    if(hist[0] == SEA_UNKNOWN || (validPlace(hist[0]) && isSea(hist[0])) ){
+    newLocation = getPlayerLocation(gv->players[playerID]);
+    //printf("****%d*****", getPlayerLocation(gv->players[playerID]));
+    if(newLocation == SEA_UNKNOWN || (validPlace(newLocation) && isSea(newLocation)) ){
       isAtSea = 1;
     }
   }
@@ -123,7 +126,7 @@ void executeMove(GameView gv, char* move){
     }
   }
   //Dracula regains 10 blood if he's at his castle and not dead.
-  if(playerID == PLAYER_DRACULA && newLocation == 17 && getPlayerHealth(gv->players[PLAYER_DRACULA]) > 0) {
+  if(playerID == PLAYER_DRACULA && newLocation == CASTLE_DRACULA && getPlayerHealth(gv->players[PLAYER_DRACULA]) > 0) {
     damagePlayer(gv->players[playerID], -10);
   }
    //If the player rested in a city.
@@ -132,14 +135,23 @@ void executeMove(GameView gv, char* move){
   }
   //We update the player's location.
   if(!dead) {
+    if(playerID == PLAYER_DRACULA) printf ("*%d | %s | ", newLocation, locationAbbr);
     setPlayerLocation(gv->players[playerID], newLocation);
-    addToPlayerHistory(gv->players[playerID], newLocation);
+    if(locationAbbr[0] == 'H' && locationAbbr[1] == 'I') {
+      addToPlayerHistory(gv->players[playerID], HIDE);
+    } else if(locationAbbr[0] == 'D' && locationAbbr[1] >= '1' && locationAbbr[1] <= '5') {
+      addToPlayerHistory(gv->players[playerID], DOUBLE_BACK_1+locationAbbr[1]-'1');
+    } else if(locationAbbr[0] == 'T' && locationAbbr[1] == 'P') {
+      addToPlayerHistory(gv->players[playerID], TELEPORT);       
+    } else {
+      addToPlayerHistory(gv->players[playerID], newLocation);
+    }
   } else {
     setPlayerLocation(gv->players[playerID], ST_JOSEPH_AND_ST_MARYS);
     addToPlayerHistory(gv->players[playerID], ST_JOSEPH_AND_ST_MARYS);
   }
 
-  //if(playerID == PLAYER_DRACULA) printf ("*%s* ", idToAbbrev(newLocation));
+  if(playerID == PLAYER_DRACULA) printf ("%s* \n", idToAbbrev(newLocation));
   //We move to the next player.
   gv->currentPlayer++;
   if(gv->currentPlayer >= NUM_PLAYERS){
