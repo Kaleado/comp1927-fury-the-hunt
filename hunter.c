@@ -9,6 +9,9 @@
 #include "Game.h"
 #include "Map.h"
 #include "HunterView.h"
+#include "Set.h"
+#include "Places.h"
+#include "GuessLocation.h"
 
 inline int isKnown(LocationID loc){
   return (loc != CITY_UNKNOWN &&
@@ -48,10 +51,13 @@ void decideHunterMove(HunterView gameState){
   LocationID currentPath[NUM_MAP_LOCATIONS];
   srand(time(NULL));
   LocationID draculasWhereabouts = whereIs(gameState, PLAYER_DRACULA);
+  Set possibleTrail[TRAIL_SIZE];
   char msg[50];
   LocationID trail[TRAIL_SIZE];
   int pathLength = 0;
+  int round = giveMeTheRound(gameState);
   //int j;
+  int i;
   giveMeTheTrail(gameState, me, trail);
   //for (j=0; j<TRAIL_SIZE; j++) printf ("*%s* ", idToAbbrev(trail[j]));
   printf ("hp = %d\n", howHealthyIs(gameState, me));
@@ -72,14 +78,14 @@ void decideHunterMove(HunterView gameState){
       registerBestPlay("MA","Dr. Seward: Madrid");
       break;
     case PLAYER_VAN_HELSING:
-      registerBestPlay("MA","Van Helsing: Manchester");
+      registerBestPlay("AM","Van Helsing: Manchester");
       break;
     case PLAYER_MINA_HARKER:
-      registerBestPlay("SO","Mina Harker: Sofia");
+      registerBestPlay("CD","Mina Harker: Castle Dracula");
       break;
     }
   }
-  //Our top priority is to pursure Dracula.
+  //Our top priority is to pursue Dracula.
   else if(isKnown(draculasWhereabouts)){
     pathLength = findMeAPath(gameState, draculasWhereabouts, currentPath);
     if(pathLength <= 1){
@@ -95,12 +101,44 @@ void decideHunterMove(HunterView gameState){
     }
   }
   //We conduct research every six rounds so we have an idea of where Dracula is (granted we don't already do).
-  else if(giveMeTheRound(gameState) % 6 == 0){
+  /*else if(giveMeTheRound(gameState) % 6 == 0){
     strcpy(msg, "Waiting and conducting research.");
     registerBestPlay(idToAbbrev(here(gameState)), msg);
-  }
+    }*/
   //If we don't know where Dracula is...
   else if(!isKnown(draculasWhereabouts)){
+    giveMeTheTrail(gameState, PLAYER_DRACULA, trail);
+    guessDraculasLocation(trail, possibleTrail);
+    //We now have some guesses as to Dracula's location.
+    //Now, we must step through each possible location for Dracula and send each hunter to one.
+    for(i = 0; i < TRAIL_SIZE; i++){
+      LocationID* potentialDestinations;
+      int numberOfPotentialDestinations;
+      //debugging
+      int ikl = 0;
+      for(ikl = 0; ikl < TRAIL_SIZE; ikl++){
+	printf("trail[%d]: %d\n", ikl, trail[ikl]);
+	showSet(possibleTrail[ikl]);
+      }
+      //enddebugging
+      potentialDestinations = toArray(possibleTrail[i], &numberOfPotentialDestinations);
+      if(numberOfPotentialDestinations != 0){
+	pathLength = findMeAPath(gameState, potentialDestinations[(me + round)%numberOfPotentialDestinations], currentPath);
+	if(pathLength > 1){
+	  sprintf(msg, "Made guess for Dracula's trail[%d] -- moving towards: %s", i, idToAbbrev(currentPath[1]));
+	  registerBestPlay(idToAbbrev(currentPath[1]), msg);
+	  break;
+	}
+	else {
+	  //This should be changed.
+	  //continue;
+	  sprintf(msg, "Made guess for Dracula's trail[%d] -- waiting: %s", i, idToAbbrev(here(gameState)));
+	  registerBestPlay(idToAbbrev(here(gameState)), msg);
+	  break;
+	}	
+      }
+    }
+    /*
     //...but we know he's in a city.
     if(draculasWhereabouts == CITY_UNKNOWN){
       registerBestPlay(idToAbbrev(getRandomMove(gameState)), "Moving randomly because Dracula is in an unknown city.");      
@@ -126,5 +164,7 @@ void decideHunterMove(HunterView gameState){
     else{
       registerBestPlay(idToAbbrev(getRandomMove(gameState)), "Moving randomly because Dracula's location is unknown.");
     }
+  }
+    */
   }
 }
