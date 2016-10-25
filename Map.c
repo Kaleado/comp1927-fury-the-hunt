@@ -379,7 +379,9 @@ int getAdjacent(Map g, LocationID start, LocationID* adjacent){
   VList c;//, d;
   int i = 0;
   for(c = g->connections[start]; c != NULL; c = c->next){
-    adjacent[i] = c->v;
+    if(adjacent != NULL){
+      adjacent[i] = c->v;
+    }
     i++;
   }
   return i;  

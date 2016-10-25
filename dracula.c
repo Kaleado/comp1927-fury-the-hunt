@@ -9,6 +9,8 @@
 #include "Map.h"
 #include "Places.h"
 
+#define START_LOCATION "MA"
+
 static void all_distance(Map g, DracView gameState, int numLocations, LocationID *Next_Place, int distance[][4]);
 static int best_nextPlace(int distance[][4], int numAdjacent, LocationID trail[TRAIL_SIZE], LocationID* adjacent, int hide, int db);
 
@@ -36,7 +38,7 @@ void decideDraculaMove(DracView gameState)
    // Logically moving version
    Map M = newMap();
    if(giveMeTheRound(gameState) == 0){
-      registerBestPlay("MA","I was on VACTION!!");
+      registerBestPlay(START_LOCATION,"I was on VACTION!!");
    } else {
       int distance [numAdjacent][4];
       all_distance(M,gameState,numAdjacent,adjacent,distance);
