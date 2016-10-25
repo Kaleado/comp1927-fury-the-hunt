@@ -13,7 +13,7 @@
 #include "Places.h"
 #include "GuessLocation.h"
 
-inline int isKnown(LocationID loc){
+int isKnown(LocationID loc){
   return (loc != CITY_UNKNOWN &&
 	  loc != SEA_UNKNOWN &&
 	  loc != UNKNOWN_LOCATION
